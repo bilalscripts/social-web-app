@@ -23,6 +23,7 @@
   "dependencies": {
     "dotenv": "^9.0.0",
     "express": "^4.17.1",
+    "mongo": "^0.1.0",
     "mongoose": "^5.12.7"
   },
   "devDependencies": {
