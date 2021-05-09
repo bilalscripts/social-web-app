@@ -2,34 +2,41 @@ const express = require('express');
 const router = express.Router(); // here we will use all routes like get and post routes
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const bcrypt = require('bcryptjs');
 
-router.get('/',(req,res)=>{
+router.get('/', (req, res) => {
 
     res.send("hello this is main directory");
 })
 
 
-router.post('/signup',(req,res)=>{
-    
-    const {name,email,password} = req.body;
-    if(!email || !password || !name){
-       return res.status(422).json({"error": "Please add all the fields"})
-    }
-    res.json({"message":"successfully posted the data"})
-    User.findOne({email: email}).then((savedUser)=>{
-        if(savedUser){
-            return res.status(422).json({"error": "User already exist with that email"})
-        }
-        const user = new User({
-            email,
-            password,
-            name
-        })
+router.post('/signup', (req, res) => {
 
-        user.save().then((user)=>{
-            res.json({message:"saved successfully"})
-        }).catch(err=>{console.log(err)})
-    }).catch(err=>{console.log(err)})
+    const { name, email, password } = req.body;
+    if (!email || !password || !name) {
+        return res.status(422).json({ "error": "Please add all the fields" })
+    }
+    res.json({ "message": "successfully posted the data" })
+    User.findOne({ email: email }).then((savedUser) => {
+        if (savedUser) {
+            return res.status(422).json({ "error": "User already exist with that email" })
+        }
+        bcrypt.hash(password, 11)
+            .then(hashedpassword => {
+
+                const user = new User({
+                    email,
+                    password:hashedpassword,
+                    name
+                })
+
+                user.save().then((user) => {
+                    res.json({ message: "saved successfully" })
+                }).catch(err => { console.log(err) })
+            })
+
+
+    }).catch(err => { console.log(err) })
 })
 
 
