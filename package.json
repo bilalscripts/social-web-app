@@ -25,6 +25,7 @@
     "bcryptjs": "^2.4.3",
     "dotenv": "^9.0.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongo": "^0.1.0",
     "mongoose": "^5.12.7"
   },
