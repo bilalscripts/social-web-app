@@ -10,34 +10,67 @@ router.get('/', (req, res) => {
 })
 
 
-router.post('/signup', (req, res) => {
+// router.post('/signup', (req, res) => {
 
-    const { name, email, password } = req.body;
-    if (!email || !password || !name) {
-        return res.status(422).json({ "error": "Please add all the fields" })
+//     const { name, email, password } = req.body;
+//     if (!email || !password || !name) {
+//         return res.status(422).json({ "error": "Please add all the fields" })
+//     }
+//     res.json({ "message": "successfully posted the data" })
+//     User.findOne({ email: email }).then((savedUser) => {
+//         if (savedUser) {
+//             return res.status(422).json({ "error": "User already exist with that email" })
+//         }
+//         bcrypt.hash(password, 11)
+//             .then(hashedpassword => {
+
+//                 const user = new User({
+//                     email,
+//                     password:hashedpassword,
+//                     name
+//                 })
+
+//                 user.save().then((user) => {
+//                     res.json({ message: "saved successfully" })
+//                 }).catch(err => { console.log(err) })
+//             })
+
+
+//     }).catch(err => { console.log(err) })
+// })
+
+
+
+router.post('/signin',(req,res)=>{
+    const {email,password} = req.body;
+    if(!email || !password){
+        res.status(422).json({"error":"password or email is missing"});
     }
-    res.json({ "message": "successfully posted the data" })
-    User.findOne({ email: email }).then((savedUser) => {
-        if (savedUser) {
-            return res.status(422).json({ "error": "User already exist with that email" })
+User.findOne({email:email}).then((savedUser)=>{
+    if(!savedUser)
+    {
+        res.status(422).json({"error":"Invalid password or Eamil"});
+    }
+    bcrypt.compare(password,savedUser.password).then(matched=>{
+        if(matched){
+            res.json({"message":"successfully signed in"})
         }
-        bcrypt.hash(password, 11)
-            .then(hashedpassword => {
-
-                const user = new User({
-                    email,
-                    password:hashedpassword,
-                    name
-                })
-
-                user.save().then((user) => {
-                    res.json({ message: "saved successfully" })
-                }).catch(err => { console.log(err) })
-            })
-
-
-    }).catch(err => { console.log(err) })
+        else{
+            res.status(422).json({"error":"Invalid password or Eamil"});
+        }
+    }).catch(err=>{console.log(err)})
 })
+
+
+// testing
+
+// "email": "nomi@ibsSucker.com",
+// "password":"wawawawa"
+
+
+})
+
+
 
 
 module.exports = router;
