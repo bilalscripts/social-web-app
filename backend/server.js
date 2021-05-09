@@ -14,14 +14,14 @@ app.use(require('./Routes/auth'))
 
 
 // connecting with atlas mongo
-// mongoose.connect(MONGOURI, {
-//     useNewUrlParser: true,
-//     useCreateIndex: true,
-//     useUnifiedTopology: true,
-//     useFindAndModify: false
-// }).then(()=>{
-//     console.log('connection done')
-// });
+mongoose.connect(MONGOURI, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+}).then(()=>{
+    console.log('connection done')
+});
 
 mongoose.connection.on('error',(err)=>{
     console.log('error in connection',err);
