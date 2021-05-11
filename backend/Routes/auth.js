@@ -5,6 +5,7 @@ const User = mongoose.model('User');
 const bcrypt = require('bcryptjs');
 const jt = require('jsonwebtoken');
 const { JT_SECRET } = require('../keys');
+const login = require('../middleware/login')
 
 router.get('/', (req, res) => {
 
@@ -42,6 +43,19 @@ router.post('/signup', (req, res) => {
 })
 
 
+
+
+
+router.get('/privateData',login, (req,res)=>{
+
+    res.send("hello user this is private data")
+})
+
+
+
+
+
+
 //route for signin
 router.post('/signin', (req, res) => {
     const { email, password } = req.body;
@@ -65,6 +79,9 @@ router.post('/signin', (req, res) => {
             }
         }).catch(err => { console.log(err) })
     })
+
+
+
 
 
     // testing
