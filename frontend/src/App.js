@@ -6,19 +6,24 @@ import {Route, Switch} from 'react-router-dom'
 import FgtPass from './components/screens/FgtPass';
 import Signup from './components/screens/Signup';
 import Home from './components/screens/Home'
+import Profile from './components/screens/Profile'
+
 
 
 const App = () => {
   return(
    <>
     <Switch>
+      
       <Route exact path='/' component={Login} />
       <Route exact path='/forgot' component={FgtPass} />
       <Route exact path='/newaccount' component={Signup} />
       <Route exact path='/home' component={Home} />
+      <Route exact path='/profile' component={Profile} />
       
 
     </Switch>
+
     
    </>
   );
@@ -26,3 +31,5 @@ const App = () => {
 
 
 export default App;
+
+

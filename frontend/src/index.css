@@ -49,7 +49,8 @@ a {
 
 .anchor {
   font-weight: bold;
-  font-size: 30px;
+  font-size: 40px;
+  margin-left: 100px;
 }
 
 .acc {
@@ -64,4 +65,44 @@ a {
 
 #filled-basic {
   width: 300px;
+}
+
+.navdiv {
+  float: right;
+  display: flex;
+  margin-right: 100px;
+}
+
+.navvbar {
+  background-color: transparent;
+}
+
+.textAreaa {
+  width: 600px;
+  height: 100px;
+  background-color: rgb(218, 221, 228);
+  border: none;
+  border-radius: 20px;
+}
+
+.post {
+  border-radius: 15px;
+  margin: 10px;
+}
+
+.sidebar {
+  height: 250px;
+}
+
+.posts {
+  margin-left: 165px;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  border-radius: 10px;
 }
