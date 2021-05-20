@@ -65,6 +65,7 @@ router.post('/signin', (req, res) => {
     User.findOne({ email: email }).then((savedUser) => {
         if (!savedUser) {
             res.status(422).json({ "error": "Invalid password or Eamil" });
+            return;
         }
         bcrypt.compare(password, savedUser.password).then(matched => {
             if (matched) {

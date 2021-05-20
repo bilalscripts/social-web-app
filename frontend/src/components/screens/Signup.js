@@ -1,44 +1,92 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from "../Navbar";
-
+import M from 'materialize-css'
+import '../../index.css';
+import {link,useHistory} from  'react-router-dom'
+import validator from 'validator';
 
 
 
 const Signup = () => {
-  
+  const history = useHistory();
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
 
-  return(
+  const postData = () => {
+
+    if(validator.isEmail(email))
+    {
+      fetch('http://localhost:3000/signup',{
+        method:"post",
+        headers:{
+          'Content-Type':"application/json"
+        },
+        body:JSON.stringify({
+          name,
+          email,
+          password
+        })
+      }).then(res=>res.json()).then(data=>{
+        if(data.error){
+          M.toast({html: data.error})
+        }
+        else{
+          history.push('/login');
+        }
+      }).catch((err)=>{
+        console.log(err)
+      });
+    }
+    else{
+      alert("please enter valid Email")
+    }    
+
+  }
+
+  return (
     <>
-      <Navbar/>
+      <Navbar />
       <div className='container-fluid'>
         <div className='row'>
           <div className='col-md-4 bg-light p-3 shadow my-5 newAccBox'>
 
-          <h2 className='acc p-4 heading'>Create Account</h2>
+            <h2 className='acc p-4 heading'>Create Account</h2>
 
-          <form>
+            
 
-            <div className='row'>
-              <TextField id="filled-basic" label="Name" variant="filled" />
-            </div>
+              <div className='row'>
+                <TextField id="filled-basic" label="Name" variant="filled"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
 
-            <div className='row'>
-              <TextField id="filled-basic" label="Email" variant="filled" />
-            </div>
+              <div className='row'>
+                <TextField id="filled-basic" label="Email" variant="filled"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
 
-            <div className='row'>
-              <TextField label="Password" variant="filled" />
-            </div>
-          
-            <br className='text-dark'></br>    
+              <div className='row'>
+                <TextField label="Password" variant="filled"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
 
-            <div className='row' id='accbtn'>
-              <button className='btn btn-success' >Sign Up</button>
-            </div>
+                />
+              </div>
 
-          </form>
+              <br className='text-dark'></br>
+
+              <div className='row' id='accbtn'>
+                <button className='btn btn-success' 
+                onClick={postData}>Sign Up</button>
+              </div>
+
+            
           </div>
         </div>
       </div>

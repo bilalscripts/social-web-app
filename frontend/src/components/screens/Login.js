@@ -1,16 +1,54 @@
 import TextField from '@material-ui/core/TextField';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import validator from 'validator';
+import M from 'materialize-css'
+
 
 
 const Login = () => {
-  
   const history = useHistory();
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  
 
+  const postData = () => {
 
-  const loginHome= () => {
-    history.push('home')
+    if(validator.isEmail(email))
+    {
+      fetch('http://localhost:3000/signin',{
+        method:"post",
+        headers:{
+          'Content-Type':"application/json"
+        },
+        body:JSON.stringify({
+          email,
+          password
+        })
+      }).then(res=>res.json()).then(data=>{
+        if(data.error){
+          M.toast({html: data.error})
+        }
+        else{
+          history.push('/');
+        }
+      }).catch((err)=>{
+        console.log(err)
+      });
+    }
+    else{
+      alert("please enter valid Email")
+    }    
+
   }
+
+
+
+
+
+
+  
 
   const createNewAcc = () => {
     history.push('newaccount')
@@ -29,13 +67,20 @@ const Login = () => {
           </div>
           <div className='col-md-5 bg-light p-3 bg-secondary box shadow'>
           
-          <form>
+          
             <div className='row'>
-            <TextField id="filled-basic" label="Email" variant="filled" />
+            <TextField id="filled-basic" label="Email"
+              value = {email}
+              onChange={(e)=>setEmail(e.target.value)}
+             variant="filled" />
             </div>
 
             <div className='row'>
-            <TextField label="Password" variant="filled" />
+            <TextField label="Password" variant="filled" 
+             value = {password}
+              onChange={(e)=>setPassword(e.target.value)}
+
+            />
             </div>
 
             <div className='andchor'>
@@ -44,7 +89,7 @@ const Login = () => {
             
 
             <div className='row'>
-            <button className='btn btn-primary' onClick={loginHome} >Login</button>
+            <button className='btn btn-primary' onClick={postData} >Login</button>
             </div>
 
             <br className='text-dark'></br>    
@@ -53,7 +98,7 @@ const Login = () => {
               <button className='btn btn-success' onClick={createNewAcc} >Create New Account</button>
             </div>
 
-          </form>
+          
 
 
           </div>

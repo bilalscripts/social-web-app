@@ -7,6 +7,8 @@ import FgtPass from './components/screens/FgtPass';
 import Signup from './components/screens/Signup';
 import Home from './components/screens/Home'
 import Profile from './components/screens/Profile'
+import Createpost from './components/screens/CreatePost';
+
 
 
 
@@ -15,11 +17,12 @@ const App = () => {
    <>
     <Switch>
       
-      <Route exact path='/' component={Login} />
+      <Route exact path='/' component={Home} />
       <Route exact path='/forgot' component={FgtPass} />
       <Route exact path='/newaccount' component={Signup} />
-      <Route exact path='/home' component={Home} />
+      <Route exact path='/login' component={Login} />
       <Route exact path='/profile' component={Profile} />
+      <Route exact path='/create' component={Createpost} />
       
 
     </Switch>
