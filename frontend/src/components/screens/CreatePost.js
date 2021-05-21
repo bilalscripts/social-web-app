@@ -1,6 +1,7 @@
 import React,{ useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Homenav from './Homenav';
+import M from 'materialize-css';
 
 
 
@@ -9,6 +10,62 @@ const Createpost = () => {
   const [comment, setComment] = useState('');
   const [body, setBody] = useState('');
   const [image, setImage] = useState('');
+  const [url, setUrl] = useState('');
+  const history = useHistory();
+
+
+const postDetails = ()=>{
+  const data = new FormData()
+  data.append("file",image)
+  data.append("upload_preset","social-web-app")
+  data.append("cloud_name","doidlafka")
+
+  fetch("https://api.cloudinary.com/v1_1/doidlafka/image/upload",{
+  method:"post",
+  body:data
+  }).then(res=>res.json()).then(data=>setUrl(data.url)).catch(err=>console.log(err))
+
+
+
+
+  if(url)
+  {
+    fetch('/createpost',{
+      method:"post",
+      headers:{
+        "Authorization":"Bearer "+localStorage.getItem("jwt"),
+        "Content-Type":"application/json",
+      },
+      body:JSON.stringify({
+        body,
+        photo:url
+      })
+    }).then(res=>res.json()).then(data=>{
+      if(data.error){
+        M.toast({html: data.error})
+      }
+      else{
+  
+        history.push('/');
+      }
+    }).catch((err)=>{
+      console.log(err)
+    });
+  }
+  else{
+    console.log('abo url khali thiiii')
+    console.log(url);
+  }
+  
+
+
+
+
+
+}
+
+
+
   return(
     <>
       <div className='container-fluid'>
@@ -36,15 +93,13 @@ const Createpost = () => {
               
               <div>
             <h4 className='m-2 mb-3'>Select Image</h4>
-            <input type="file" name="myImage" onChange={(e)=>{setImage(e.target.files)}} />
+            <input type="file" name="myImage" onChange={(e)=>{setImage(e.target.files[0])}} />
           </div>
 
 
             </div>
             <div className='p-3 my-2 d-flex justify-content-center'>
-              <button type="button" className="btn btn-primary" onClick={()=>{
-                console.log(comment);
-              }}>Post</button>
+              <button type="button" className="btn btn-primary" onClick={postDetails}>Post</button>
             </div>
           
 

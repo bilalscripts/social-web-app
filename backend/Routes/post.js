@@ -7,16 +7,17 @@ const login = require('../middleware/login')
 
 router.post('/createpost',login,(req,res)=>{
 
-    const {title,body} = req.body;
-    if(!title || !body)
+    const {body, photo} = req.body;
+    if(!photo || !body  )
     {
        return res.status(422).json({"error":"please add all the fields"});
     }
 
     req.user.password = undefined;
     const post = new Post({
-        title,
+        
         body,
+        photo,
         postedBy: req.user
     })
     post.save().then(result=>{

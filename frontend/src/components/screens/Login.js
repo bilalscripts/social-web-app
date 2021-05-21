@@ -11,35 +11,42 @@ const Login = () => {
   const history = useHistory();
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  
+
 
   const postData = () => {
 
-    if(validator.isEmail(email))
-    {
-      fetch('http://localhost:3000/signin',{
-        method:"post",
-        headers:{
-          'Content-Type':"application/json"
+    if (validator.isEmail(email)) {
+      fetch("/signin", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json"
         },
-        body:JSON.stringify({
-          email,
-          password
+        body: JSON.stringify({
+          password,
+          email
         })
-      }).then(res=>res.json()).then(data=>{
-        if(data.error){
-          M.toast({html: data.error})
-        }
-        else{
-          history.push('/');
-        }
-      }).catch((err)=>{
-        console.log(err)
-      });
+      }).then(res => res.json())
+        .then(data => {
+          console.log(data)
+          if (data.error) {
+            M.toast({ html: data.error, classes: "#c62828 red darken-3" })
+          }
+          else {
+            localStorage.setItem("jwt", data.token)
+            localStorage.setItem("user", JSON.stringify(data.user))
+            
+            M.toast({ html: "signedin success", classes: "#43a047 green darken-1" })
+            history.push('/')
+          }
+        }).catch(err => {
+          console.log(err)
+        })
+
+
     }
-    else{
+    else {
       alert("please enter valid Email")
-    }    
+    }
 
   }
 
@@ -48,16 +55,16 @@ const Login = () => {
 
 
 
-  
+
 
   const createNewAcc = () => {
     history.push('newaccount')
   }
 
 
-  return(
-      
-      <>
+  return (
+
+    <>
 
       <div className='container-fluid box'>
         <div className='row'>
@@ -66,46 +73,46 @@ const Login = () => {
             <h3>Bat bat py Treat 😆</h3>
           </div>
           <div className='col-md-5 bg-light p-3 bg-secondary box shadow'>
-          
-          
+
+
             <div className='row'>
-            <TextField id="filled-basic" label="Email"
-              value = {email}
-              onChange={(e)=>setEmail(e.target.value)}
-             variant="filled" />
+              <TextField id="filled-basic" label="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                variant="filled" />
             </div>
 
             <div className='row'>
-            <TextField label="Password" variant="filled" 
-             value = {password}
-              onChange={(e)=>setPassword(e.target.value)}
+              <TextField label="Password" variant="filled"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
 
-            />
+              />
             </div>
 
             <div className='andchor'>
               <a href="/forgot"> Forgot Password </a>
             </div>
-            
+
 
             <div className='row'>
-            <button className='btn btn-primary' onClick={postData} >Login</button>
+              <button className='btn btn-primary' onClick={postData} >Login</button>
             </div>
 
-            <br className='text-dark'></br>    
+            <br className='text-dark'></br>
 
             <div className='row' id='accbtn'>
               <button className='btn btn-success' onClick={createNewAcc} >Create New Account</button>
             </div>
 
-          
+
 
 
           </div>
         </div>
       </div>
-        
-    
+
+
     </>
 
   )

@@ -45,13 +45,10 @@ router.post('/signup', (req, res) => {
 
 
 
-
 router.get('/privateData',login, (req,res)=>{
 
     res.send("hello user this is private data")
 })
-
-
 
 
 
@@ -65,7 +62,6 @@ router.post('/signin', (req, res) => {
     User.findOne({ email: email }).then((savedUser) => {
         if (!savedUser) {
             res.status(422).json({ "error": "Invalid password or Eamil" });
-            return;
         }
         bcrypt.compare(password, savedUser.password).then(matched => {
             if (matched) {
@@ -92,7 +88,6 @@ router.post('/signin', (req, res) => {
 
 
 })
-
 
 
 
