@@ -67,7 +67,8 @@ router.post('/signin', (req, res) => {
             if (matched) {
                 //res.json({ "message": "successfully signed in" })
                 const token = jt.sign({_id:savedUser._id},JT_SECRET);
-                res.json({token});
+                const {_id,name,email,followers,following,pic} = savedUser
+                res.json({token,user:{_id,name,email,followers,following,pic}})
             }
             else {
                  res.status(422).json({"error":"Invalid password or Eamil"});

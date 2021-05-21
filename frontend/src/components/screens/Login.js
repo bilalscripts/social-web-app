@@ -1,13 +1,15 @@
 import TextField from '@material-ui/core/TextField';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import validator from 'validator';
 import M from 'materialize-css'
+import {UserContext} from '../../App';
 
 
 
 const Login = () => {
+  const {state, dispatch} = useContext(UserContext);
   const history = useHistory();
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -34,9 +36,9 @@ const Login = () => {
           else {
             localStorage.setItem("jwt", data.token)
             localStorage.setItem("user", JSON.stringify(data.user))
-            
+            dispatch({type:"USER",payload:data.user})
             M.toast({ html: "signedin success", classes: "#43a047 green darken-1" })
-            history.push('/')
+            history.push('/');
           }
         }).catch(err => {
           console.log(err)
