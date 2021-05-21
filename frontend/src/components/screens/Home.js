@@ -2,7 +2,7 @@ import Card from './Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom';
-import Homenav from '../Navbar';
+import Homenav from './Homenav';
 
 
 const Home = (props) => {

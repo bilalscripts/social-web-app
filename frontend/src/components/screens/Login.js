@@ -1,7 +1,7 @@
 import TextField from '@material-ui/core/TextField';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import validator from 'validator';
 import M from 'materialize-css'
 import {UserContext} from '../../App';
@@ -93,7 +93,7 @@ const Login = () => {
             </div>
 
             <div className='andchor'>
-              <a href="/forgot"> Forgot Password </a>
+              <Link to="/forgot"> Forgot Password </Link>
             </div>
 
 

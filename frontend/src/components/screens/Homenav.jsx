@@ -15,7 +15,7 @@ const Homenav = () => {
         <div className='navdiv'>
           <Link to='/home' className="navbar-brand d-flex p-2 text-dark "> Home <HomeOutlinedIcon style={{marginTop:'3px',marginLeft:'2px'}} /></Link>
           <Link to='/profile' className="navbar-brand d-flex p-2 text-dark ">Profile<PersonOutlineSharpIcon style={{marginTop:'3px',marginLeft:'2px'}} /></Link>
-          <Link to='/' className="navbar-brand d-flex p-2 text-dark ">Logout<ExitToAppOutlinedIcon style={{marginTop:'3px',marginLeft:'2px'}} /></Link>
+          <Link to='/login' className="navbar-brand d-flex p-2 text-dark ">Logout<ExitToAppOutlinedIcon style={{marginTop:'3px',marginLeft:'2px'}} /></Link>
         </div>
       </div>
       </div>
