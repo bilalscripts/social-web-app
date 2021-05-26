@@ -33,15 +33,14 @@ const Createpost = () => {
       method: "post",
       body: data
     }).then(res => res.json()).then((data) => {
-      settingUrl(data.url);
-
+      
+      setUrl(data.url)
 
     }).catch(err => console.log(err))
 
-    const settingUrl = async (data) =>{
-      await setUrl(data);
-      if (url) {
-        fetch('/createpost', {
+      
+    console.log("see this is url OK???", url);
+          fetch('/createpost', {
           method: "post",
           headers: {
             "Authorization": "Bearer " + localStorage.getItem("jwt"),
@@ -62,12 +61,10 @@ const Createpost = () => {
         }).catch((err) => {
           console.log(err)
         });
-      }
-      else {
-        console.log('abo url khali thiiii')
-        console.log(url);
-      }
-    }
+
+           
+      
+    
   }
 
 
@@ -93,7 +90,7 @@ const Createpost = () => {
     e.preventDefault();
 
     const options = {
-      maxSizeMB: 2,
+      maxSizeMB: 0.5,
       maxWidthOrHeight: 800,
       useWebWorker: true
     };
