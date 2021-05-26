@@ -89,7 +89,7 @@ const Createpost = () => {
 
               <div>
                 <h4 className='m-2 mb-3'>Select Image</h4>
-                <ImageCompressor />
+                <ImageCompressor setImage={setImage}/>
               </div>
 
 

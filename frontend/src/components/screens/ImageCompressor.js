@@ -20,6 +20,7 @@ class ImageCompressor extends React.Component {
 
   selectImage = e => {
     const imageFile = e.target.files[0];
+    this.props.setImage(imageFile)
     if(imageFile.size/1024/1024 <= 5){
       this.setState({
         originalLink: URL.createObjectURL(imageFile),
@@ -77,7 +78,12 @@ class ImageCompressor extends React.Component {
                 type="file"
                 accept="image/*"
                 className="btn btn-secondary"
-                onChange={e => this.selectImage(e)}
+                onChange={(e) => {
+                  this.selectImage(e)
+                  
+
+                
+                }}
               />
           </div>
           
