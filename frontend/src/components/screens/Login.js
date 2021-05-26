@@ -85,7 +85,7 @@ const Login = () => {
             </div>
 
             <div className='row'>
-              <TextField label="Password" variant="filled"
+              <TextField type="password" label="Password" variant="filled"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
 

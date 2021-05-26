@@ -7,8 +7,10 @@ const login = require('../middleware/login')
 
 router.post('/createpost',login,(req,res)=>{
 
-    const {body, photo} = req.body;
-    if(!photo || !body  )
+    const {photo, body} = req.body;
+    console.log(photo)
+    console.log(body)
+    if(!photo || !body )
     {
        return res.status(422).json({"error":"please add all the fields"});
     }
@@ -27,9 +29,9 @@ router.post('/createpost',login,(req,res)=>{
 })
 
 
-router.get('/allpost',(req,res)=>{
+router.get('/allpost',login,(req,res)=>{
     Post.find().populate('postedBy','_id name').then(posts=>{
-        res.json(posts)
+        res.json({posts})
     }).catch(err=>{console.log(err)})
 })
 

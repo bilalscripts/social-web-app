@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from "../Navbar";
 import M from 'materialize-css'
 import '../../index.css';
-import {link,useHistory} from  'react-router-dom'
+import {useHistory} from  'react-router-dom'
 import validator from 'validator';
 
 
@@ -72,7 +72,7 @@ const Signup = () => {
               </div>
 
               <div className='row'>
-                <TextField label="Password" variant="filled"
+                <TextField type="password" label="Password" variant="filled"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
 

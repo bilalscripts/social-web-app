@@ -9,7 +9,7 @@ const FgtPass = () => {
 
   const history = useHistory();
   const cancelAction = () => {
-    history.push('/')
+    history.push('/login')
   }
   
   return(

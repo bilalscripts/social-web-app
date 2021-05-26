@@ -7,7 +7,7 @@ import SendIcon from '@material-ui/icons/Send';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-const Card = () => {
+const Card = (props) => {
 
   const [liketoggle,setLikeToggle] = useState(false);
   const [commentToggle, setCommentToggle] = useState(false);
@@ -31,11 +31,11 @@ const Card = () => {
         <div className='row'>
           <div className='col-md-8 bg-light post'>
             <div className='border-bottom my-3 p-2'>
-              <Link to='/profile'>ProfileName</Link>
-              <p className='my-3'>Somedecription about post if exists</p>
+              <Link to='/profile'>{props.postedBy}</Link>
+              <p className='my-3'>{props.body}</p>
             </div>
             <div className='image border-bottom p-2'>
-              <img src='https://source.unsplash.com/collection/190727/600x400' alt='thisImage'/>
+              <img src={props.photo} alt='thisImage'/>
             </div>
 
             <div className='p-2 d-flex justify-content-center'>
