@@ -85,6 +85,7 @@ a {
   background-color: rgb(218, 221, 228);
   border: none;
   border-radius: 20px;
+  outline: none;
 }
 
 .post {

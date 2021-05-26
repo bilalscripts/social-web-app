@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Homenav from './Homenav';
 import M from 'materialize-css';
+import ImageCompressor from './ImageCompressor';
 
 
 
@@ -88,7 +89,7 @@ const Createpost = () => {
 
               <div>
                 <h4 className='m-2 mb-3'>Select Image</h4>
-                <input type="file" name="myImage" onChange={(e) => { setImage(e.target.files[0]) }} />
+                <ImageCompressor />
               </div>
 
 
