@@ -2,17 +2,25 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Homenav from './Homenav';
 import M from 'materialize-css';
-import ImageCompressor from './ImageCompressor';
+import imageCompression from "browser-image-compression";
+import Card from "react-bootstrap/Card";
+
 
 
 
 const Createpost = () => {
 
-  
   const [body, setBody] = useState('');
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState();
   const [url, setUrl] = useState('');
   const history = useHistory();
+  const [img, setImg] = useState({
+    compressedLink:
+      "",
+    originalImage: "",
+    originalLink: "",
+    uploadImage: false
+  })
 
 
   const postDetails = () => {
@@ -24,42 +32,102 @@ const Createpost = () => {
     fetch("https://api.cloudinary.com/v1_1/doidlafka/image/upload", {
       method: "post",
       body: data
-    }).then(res => res.json()).then((data) =>{ 
-      
-      setUrl(data.url)
-      console.log(data.url)
-      console.log(body)
-      postToDb();
+    }).then(res => res.json()).then((data) => {
+      settingUrl(data.url);
+
+
     }).catch(err => console.log(err))
 
+    const settingUrl = async (data) =>{
+      await setUrl(data);
+      if (url) {
+        fetch('/createpost', {
+          method: "post",
+          headers: {
+            "Authorization": "Bearer " + localStorage.getItem("jwt"),
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            body,
+            photo: url
+          })
+        }).then(res => res.json()).then(data => {
+          if (data.error) {
+            M.toast({ html: data.error })
+          }
+          else {
+  
+            history.push('/');
+          }
+        }).catch((err) => {
+          console.log(err)
+        });
+      }
+      else {
+        console.log('abo url khali thiiii')
+        console.log(url);
+      }
+    }
   }
 
-  const postToDb = ()=>{
 
-    fetch('/createpost',{
-      method:"post",
-      headers:{
-        "Authorization":"Bearer "+localStorage.getItem("jwt"),
-        "Content-Type":"application/json",
-      },
-      body:JSON.stringify({
-        body,
-        photo:url
-      })
-    }).then(res=>res.json()).then(data=>{
-      if(data.error){
-        M.toast({html: data.error})
-      }
-      else{
-  
-        history.push('/');
-      }
-    }).catch((err)=>{
-      console.log(err)
+  const selectImage = e => {
+    const imageFile = e.target.files[0];
+    //console.log(imageFile);
+    if (imageFile.size / 1024 / 1024 <= 50) {
+      setImg({
+        originalLink: URL.createObjectURL(imageFile),
+        originalImage: imageFile,
+        outputFileName: imageFile.name,
+        uploadImage: true
+      });
+    } else {
+      alert('Select Image upto 5 Mb');
+      return 0;
+    }
+
+  };
+
+
+  const compressUpload = e => {
+    e.preventDefault();
+
+    const options = {
+      maxSizeMB: 2,
+      maxWidthOrHeight: 800,
+      useWebWorker: true
+    };
+
+    if (options.maxSizeMB >= img.originalImage.size / 1024 / 1024) {
+      alert("Bring a bigger image");
+      return 0;
+    }
+
+    let output;
+    imageCompression(img.originalImage, options).then(x => {
+      output = x;
+      console.log(output);
+      const link = URL.createObjectURL(output);
+      //console.log(output);
+
+
+      setImage(
+        x
+      );
+      
+      console.log('image after compression: ',x);
+
+      setImg({
+        compressedLink: link
+      });
+
+
     });
-  
-  }
+    //console.log(output);
 
+    setImg({ clicked: true });
+    return 1;
+  };
 
 
   return (
@@ -89,7 +157,32 @@ const Createpost = () => {
 
               <div>
                 <h4 className='m-2 mb-3'>Select Image</h4>
-                <ImageCompressor setImage={setImage}/>
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="btn btn-secondary"
+                  onChange={e => selectImage(e)}
+                />
+                {img.outputFileName ? (
+                  <button
+                    type="button"
+                    className="btn btn-dark"
+                    onClick={e => compressUpload(e)}
+                  >
+                    Preview
+                  </button>
+                ) : (
+                  <></>
+                )}
+                {
+                  img.compressedLink ? (
+                    <div className="col-md-4 offset-3 my-4">
+                      <Card.Img variant="top" src={img.compressedLink} style={{ width: '300px', height: '300px', borderRadius: '150px' }}></Card.Img>
+                    </div>) :
+                    (
+                      <></>
+                    )
+                }
               </div>
 
 
