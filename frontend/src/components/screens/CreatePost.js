@@ -33,38 +33,35 @@ const Createpost = () => {
       method: "post",
       body: data
     }).then(res => res.json()).then((data) => {
-      
-      setUrl(data.url)
+      console.log(data.url)
+// sending data to the database
+      fetch('/createpost', {
+        method: "post",
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("jwt"),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          body,
+          photo: data.url
+        })
+      }).then(res => res.json()).then(data => {
+        if (data.error) {
+          M.toast({ html: data.error })
+        }
+        else {
+
+          history.push('/');
+        }
+      }).catch((err) => {
+        console.log(err)
+      });
+
 
     }).catch(err => console.log(err))
 
-      
-    console.log("see this is url OK???", url);
-          fetch('/createpost', {
-          method: "post",
-          headers: {
-            "Authorization": "Bearer " + localStorage.getItem("jwt"),
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            body,
-            photo: url
-          })
-        }).then(res => res.json()).then(data => {
-          if (data.error) {
-            M.toast({ html: data.error })
-          }
-          else {
-  
-            history.push('/');
-          }
-        }).catch((err) => {
-          console.log(err)
-        });
-
-           
-      
     
+
   }
 
 
