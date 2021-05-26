@@ -88,7 +88,7 @@ const Createpost = () => {
 
     const options = {
       maxSizeMB: 0.5,
-      maxWidthOrHeight: 800,
+      maxWidthOrHeight: 200,
       useWebWorker: true
     };
 

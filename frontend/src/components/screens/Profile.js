@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Homenav from './Homenav';
 import Button from '@material-ui/core/Button';
@@ -12,8 +12,21 @@ let count = 4;
 
 
 const Profile = () => {
-  
+
   const [isOpen,setIsOpen] = useState(false);
+  const [mypics,setPics] = useState([])
+
+  useEffect(()=>{
+
+    fetch('/mypost',{
+      headers:{
+        'Authorization':'Bearer '+localStorage.getItem('jwt')
+      }
+    }).then(res=>res.json())
+    .then(result=>setPics(result))
+    
+
+  },[])
   
   const togglePopus = () => {
     setIsOpen(!isOpen);
@@ -26,6 +39,7 @@ const Profile = () => {
     <Homenav />
     <div className='container-fluid'>
       <div className='row'>
+        
         
         <div className='col-md-4 picture'>
           <img style={{borderRadius:'50%'}} src='https://source.unsplash.com/250x250/?water' alt='imaheHere'></img>
@@ -75,8 +89,13 @@ const Profile = () => {
           
         </div>
       </div>
+            {
+              
+              mypics.map((item)=>{
+                return  <Profilecards url={item.photo}/> ;
 
-      <Profilecards />
+              })
+            }
       
     </div>
     </>
