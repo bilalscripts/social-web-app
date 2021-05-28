@@ -39,6 +39,8 @@ useEffect(()=>{
     <Route exact path='/login' component={Login} />
     <Route exact path='/profile' component={Profile} />
     <Route exact path='/create' component={Createpost} />
+    <Route exact path='/indiv' component={Individualprfle} />
+
 
   </Switch>
 
@@ -53,7 +55,7 @@ const App = () => {
     <BrowserRouter>
 
       <Routing />
-      {/* <Individualprfle /> */}
+      
       
       </BrowserRouter>
       </UserContext.Provider>

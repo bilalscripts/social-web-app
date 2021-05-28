@@ -1,4 +1,4 @@
-import { Link } from '@material-ui/core';
+import { Link, useHistory } from 'react-router-dom';
 import React, { useState } from 'react';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
@@ -35,7 +35,7 @@ const Card = (props) => {
               <div className='float-end'> 
                 <Threedotmenu />
               </div>
-              <Link to='/profile'>{props.postedBy}</Link>
+              <Link to='/indiv' className="btn">{props.postedBy}</Link>
               <p className='my-3'>{props.body}</p>
             </div>
             <div className='image border-bottom p-2'>
