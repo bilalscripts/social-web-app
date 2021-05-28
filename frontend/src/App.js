@@ -10,7 +10,10 @@ import Home from './components/screens/Home'
 import Profile from './components/screens/Profile'
 import Createpost from './components/screens/CreatePost';
 import {reducer, initilaState} from './reducers/userReducer';
-export const UserContext = createContext()
+import Individualprfle from './components/screens/Individualprfle';
+export const UserContext = createContext();
+
+
 
 
 const Routing = ()=>{
@@ -36,7 +39,6 @@ useEffect(()=>{
     <Route exact path='/login' component={Login} />
     <Route exact path='/profile' component={Profile} />
     <Route exact path='/create' component={Createpost} />
-    
 
   </Switch>
 
@@ -49,7 +51,10 @@ const App = () => {
   return(
     <UserContext.Provider value={{state,dispatch}}>
     <BrowserRouter>
-      <Routing/>
+
+      <Routing />
+      {/* <Individualprfle /> */}
+      
       </BrowserRouter>
       </UserContext.Provider>
 

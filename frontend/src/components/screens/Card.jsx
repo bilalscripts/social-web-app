@@ -5,6 +5,7 @@ import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import CommentOutlinedIcon from '@material-ui/icons/CommentOutlined';
 import SendIcon from '@material-ui/icons/Send';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Threedotmenu from './Threedotmenu';
 
 
 const Card = (props) => {
@@ -31,6 +32,9 @@ const Card = (props) => {
         <div className='row'>
           <div className='col-md-8 bg-light post'>
             <div className='border-bottom my-3 p-2'>
+              <div className='float-end'> 
+                <Threedotmenu />
+              </div>
               <Link to='/profile'>{props.postedBy}</Link>
               <p className='my-3'>{props.body}</p>
             </div>

@@ -43,11 +43,8 @@ const Home = (props) => {
           <div className='border-bottom p-3'>
           <button onClick={createPost}>Create Post </button>
           </div>
-
-          
-
         </div>
-
+        <div className='border-light border-bottom my-4'></div>
         </div>
       </div>
 

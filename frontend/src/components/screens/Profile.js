@@ -88,13 +88,14 @@ const Profile = () => {
           </div>
           
         </div>
+        <div className='border-light border-bottom my-4'></div>
       </div>
       <div className='row'>
             {
               
               mypics.map((item)=>{
                 
-                return  <Profilecards url={item.photo}/> ;
+                return <Profilecards url={item.photo}/> ;
 
               })
             }
