@@ -89,13 +89,16 @@ const Profile = () => {
           
         </div>
       </div>
+      <div className='row'>
             {
               
               mypics.map((item)=>{
+                
                 return  <Profilecards url={item.photo}/> ;
 
               })
             }
+            </div>
       
     </div>
     </>
