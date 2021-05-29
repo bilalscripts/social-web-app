@@ -5,15 +5,17 @@ import { useHistory, Link } from 'react-router-dom';
 import validator from 'validator';
 import M from 'materialize-css'
 import {UserContext} from '../../App';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
-
-
+toast.configure();
 const Login = () => {
   const {state, dispatch} = useContext(UserContext);
   const history = useHistory();
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
+ 
 
   const postData = () => {
 
@@ -31,13 +33,13 @@ const Login = () => {
         .then(data => {
           console.log(data)
           if (data.error) {
-            M.toast({ html: data.error, classes: "#c62828 red darken-3" })
+            toast.error(data.error,{position:toast.POSITION.TOP_RIGHT})
           }
           else {
             localStorage.setItem("jwt", data.token)
             localStorage.setItem("user", JSON.stringify(data.user))
             dispatch({type:"USER",payload:data.user})
-            M.toast({ html: "signedin success", classes: "#43a047 green darken-1" })
+            toast.success("Login successfully" ,{position:toast.POSITION.TOP_RIGHT})
             history.push('/');
           }
         }).catch(err => {
@@ -47,7 +49,7 @@ const Login = () => {
 
     }
     else {
-      alert("please enter valid Email")
+      toast.error('all fields mult be fille' , {position:toast.POSITION.TOP_RIGHT});
     }
 
   }

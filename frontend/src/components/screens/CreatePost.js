@@ -4,6 +4,10 @@ import Homenav from './Homenav';
 import M from 'materialize-css';
 import imageCompression from "browser-image-compression";
 import Card from "react-bootstrap/Card";
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+
+toast.configure();
 
 
 
@@ -48,7 +52,7 @@ const Createpost = () => {
         })
       }).then(res => res.json()).then(data => {
         if (data.error) {
-          M.toast({ html: data.error })
+          toast.warn(data.error , {position:toast.POSITION.TOP_RIGHT})
         }
         else {
 

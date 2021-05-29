@@ -6,9 +6,12 @@ import M from 'materialize-css'
 import '../../index.css';
 import {useHistory} from  'react-router-dom'
 import validator from 'validator';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 
 
+toast.configure();
 const Signup = () => {
   const history = useHistory();
   const [name, setName] = useState('');
@@ -31,7 +34,7 @@ const Signup = () => {
         })
       }).then(res=>res.json()).then(data=>{
         if(data.error){
-          M.toast({html: data.error})
+          toast.warn(data.error,{position:toast.POSITION.TOP_RIGHT})
         }
         else{
           history.push('/login');
@@ -41,7 +44,7 @@ const Signup = () => {
       });
     }
     else{
-      alert("please enter valid Email")
+      toast.error('all fields must be filled',{position:toast.POSITION.TOP_RIGHT})
     }    
 
   }
