@@ -4,6 +4,10 @@ import Homenav from './Homenav';
 import M from 'materialize-css';
 import imageCompression from "browser-image-compression";
 import Card from "react-bootstrap/Card";
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+
+toast.configure();
 
 
 
@@ -23,9 +27,10 @@ const Createpost = () => {
   })
 
 
-  const postDetails = () => {
+  const postDetails = (x) => {
+    
     const data = new FormData()
-    data.append("file", image)
+    data.append("file", x)
     data.append("upload_preset", "social-web-app")
     data.append("cloud_name", "doidlafka")
 
@@ -47,7 +52,7 @@ const Createpost = () => {
         })
       }).then(res => res.json()).then(data => {
         if (data.error) {
-          M.toast({ html: data.error })
+          toast.warn(data.error , {position:toast.POSITION.TOP_RIGHT})
         }
         else {
 
@@ -83,43 +88,23 @@ const Createpost = () => {
   };
 
 
-  const compressUpload = e => {
-    e.preventDefault();
+  const compressUpload = () => {
 
     const options = {
       maxSizeMB: 0.5,
       maxWidthOrHeight: 200,
       useWebWorker: true
     };
-
-    if (options.maxSizeMB >= img.originalImage.size / 1024 / 1024) {
-      alert("Bring a bigger image");
-      return 0;
-    }
-
-    let output;
-    imageCompression(img.originalImage, options).then(x => {
-      output = x;
-      console.log(output);
-      const link = URL.createObjectURL(output);
-      //console.log(output);
-
-
-      setImage(
-        x
-      );
-      
-      console.log('image after compression: ',x);
-
-      setImg({
-        compressedLink: link
-      });
-
-
-    });
-    //console.log(output);
-
-    setImg({ clicked: true });
+    
+    img.originalImage && body ? (
+      imageCompression(img.originalImage, options).then(x => {
+        const link = URL.createObjectURL(x);
+        postDetails(x)
+        console.log('image after compression: ',x);
+      })
+    ) : (
+      toast.error('image or title is missing ')
+    )
     return 1;
   };
 
@@ -157,21 +142,10 @@ const Createpost = () => {
                   className="btn btn-secondary"
                   onChange={e => selectImage(e)}
                 />
-                {img.outputFileName ? (
-                  <button
-                    type="button"
-                    className="btn btn-dark"
-                    onClick={e => compressUpload(e)}
-                  >
-                    Preview
-                  </button>
-                ) : (
-                  <></>
-                )}
                 {
-                  img.compressedLink ? (
+                  img.originalLink ? (
                     <div className="col-md-4 offset-3 my-4">
-                      <Card.Img variant="top" src={img.compressedLink} style={{ width: '300px', height: '300px', borderRadius: '150px' }}></Card.Img>
+                      <Card.Img variant="top" src={img.originalLink} style={{ width: '300px', height: '300px'}}></Card.Img>
                     </div>) :
                     (
                       <></>
@@ -182,7 +156,9 @@ const Createpost = () => {
 
             </div>
             <div className='p-3 my-2 d-flex justify-content-center'>
-              <button type="button" className="btn btn-primary" onClick={postDetails}>Post</button>
+              <button type="button" className="btn btn-primary" onClick={() => {
+                compressUpload();
+              }}>Post</button>
             </div>
 
 

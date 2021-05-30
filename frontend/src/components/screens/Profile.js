@@ -6,15 +6,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import TextField from '@material-ui/core/TextField';
 import PopUpDailoge from './PopUpDailoge';
 import Profilecards from './Profilecards';
-
+import Img from '../images/dp.png'
 
 let count = 4;
 
-
 const Profile = () => {
+  
+  
 
   const [isOpen,setIsOpen] = useState(false);
   const [mypics,setPics] = useState([])
+  const [dpPic,SetDpPic] = useState(Img)
+  
+  
+  
 
   useEffect(()=>{
 
@@ -24,14 +29,44 @@ const Profile = () => {
       }
     }).then(res=>res.json())
     .then(result=>setPics(result))
-    
-
   },[])
+
   
   const togglePopus = () => {
     setIsOpen(!isOpen);
   }
 
+  const selectImage = e => {
+    const imageFile = e.target.files[0];
+    SetDpPic(imageFile);
+    //console.log(imageFile);
+    // if (imageFile.size / 1024 / 1024 <= 50) {
+    //   setImg({
+    //     originalLink: URL.createObjectURL(imageFile),
+    //     originalImage: imageFile,
+    //     outputFileName: imageFile.name,
+    //     uploadImage: true
+    //   });
+    // } else {
+    //   alert('Select Image upto 5 Mb');
+    //   return 0;
+    // }
+
+  };
+
+
+ 
+  let image;
+  const dailogClick =(event) => {
+    const fileSelector = document.createElement('input');
+    fileSelector.setAttribute('type', 'file');
+    fileSelector.setAttribute('multiple', 'multiple');
+    fileSelector.setAttribute('onChange','selectImage(e)')
+    
+    // event.preventDefault();
+    // fileSelector.click(selectImage(event)) 
+
+  }
 
 
   return(
@@ -42,7 +77,7 @@ const Profile = () => {
         
         
         <div className='col-md-4 picture'>
-          <img style={{borderRadius:'50%'}} src='https://source.unsplash.com/250x250/?water' alt='imaheHere'></img>
+          <img style={{borderRadius:'50%'}}  src='https://source.unsplash.com/250x250/?water' alt='imaheHere'></img>
         </div>
 
         <div className='col-md-8 d-block'>
@@ -53,6 +88,10 @@ const Profile = () => {
             {isOpen && <PopUpDailoge
               content={<>
                 <form>
+                <div className='text-center' onClick={(e) => dailogClick(e)}>
+                <img src = {image} alt='imgaeHere' height="200px" width="200px" id='openImage'/>
+                  
+                </div>
                 <div className='row'>
                   <TextField id="filled-basic" label="New name" variant="filled" />
                 </div>
