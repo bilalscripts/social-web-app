@@ -8,13 +8,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Threedotmenu from './Threedotmenu';
 
 
+
+
 const Card = (props) => {
 
   const [liketoggle, setLikeToggle] = useState(false);
   const [commentToggle, setCommentToggle] = useState(false);
   const [commText, setCommText] = useState('');
+  
 
-  console.log(props.likes.indexOf(props.id))
+
+
+  console.log(props.likes.indexOf(localStorage.getItem("user")._id))
  
   
   const likePost = (id) =>{
@@ -28,7 +33,7 @@ const Card = (props) => {
         postId:id,
       })
     }).then(res=>res.json()).then(result=>{
-      const newData = result
+      props.updateFunc(result);
     })
   }
 
@@ -51,14 +56,13 @@ const Card = (props) => {
 
 
   const toggleClick = (id) => {
-    if(props.likes.indexOf(props.id)!==-1){
+    if(liketoggle){
       setLikeToggle(false)
-      likePost(id)
-
+      unlikePost(id)
     }
     else{
       setLikeToggle(true)
-      unlikePost(id)
+      likePost(id)
     }
 
     

@@ -10,6 +10,9 @@ const Home = (props) => {
   const [data,setData] = useState([]);
     useEffect(()=>{
 
+
+      
+
       fetch('/allpost',{
         method:"get",
         headers:{
@@ -19,6 +22,22 @@ const Home = (props) => {
         setData(result.posts)
       });
     },[])
+    
+
+    const updateData = (result) =>{
+      const newData = data.map((item)=>{
+        if(item._id===result._id)
+        {
+          return result;
+        }
+        else{
+          return item;
+        }
+      })
+      setData(newData);
+    }
+
+
 
   const createPost = () => {
     history.push('/create')
@@ -51,7 +70,8 @@ const Home = (props) => {
     {
       data.map(item=>{
         return (
-          <Card body={item.body} postedBy={item.postedBy.name} photo={item.photo} key={item._id} id={item._id} likes={item.likes}/>
+          <Card body={item.body} postedBy={item.postedBy.name} photo={item.photo} key={item._id} 
+          id={item._id} likes={item.likes} updateFunc={updateData}/>
         )
       })
     }
