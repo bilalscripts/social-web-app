@@ -13,6 +13,8 @@ const Card = (props) => {
   const [liketoggle, setLikeToggle] = useState(false);
   const [commentToggle, setCommentToggle] = useState(false);
   const [commText, setCommText] = useState('');
+
+  console.log(props.likes.indexOf(props.id))
  
   
   const likePost = (id) =>{
@@ -49,14 +51,14 @@ const Card = (props) => {
 
 
   const toggleClick = (id) => {
-    if(props.likes.find(id)){
-      setLikeToggle(true)
-      unlikePost(id)
+    if(props.likes.indexOf(props.id)!==-1){
+      setLikeToggle(false)
+      likePost(id)
 
     }
     else{
-      setLikeToggle(false)
-      likePost(id)
+      setLikeToggle(true)
+      unlikePost(id)
     }
 
     
