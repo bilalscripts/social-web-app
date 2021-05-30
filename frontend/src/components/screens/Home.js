@@ -51,7 +51,7 @@ const Home = (props) => {
     {
       data.map(item=>{
         return (
-          <Card body={item.body} postedBy={item.postedBy.name} photo={item.photo} key={item._id}/>
+          <Card body={item.body} postedBy={item.postedBy.name} photo={item.photo} key={item._id} id={item._id} likes={item.likes}/>
         )
       })
     }
