@@ -1,13 +1,15 @@
 import Card from './Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import Homenav from './Homenav';
+import {UserContext} from '../../App'
 
 
 const Home = (props) => {
   const history = useHistory();
   const [data,setData] = useState([]);
+  const [state,dispatch] = useContext(UserContext);
     useEffect(()=>{
 
 
