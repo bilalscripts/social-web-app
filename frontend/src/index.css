@@ -155,3 +155,9 @@ img {
   border: 1px solid #999;
   font-size: 20px;
 }
+
+.popupitems {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}

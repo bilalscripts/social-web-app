@@ -39,6 +39,7 @@ const Card = (props) => {
 
 
   const unlikePost = (id) =>{
+
     fetch('/unlike',{
       method:'put',
       headers:{
@@ -48,7 +49,7 @@ const Card = (props) => {
       body:JSON.stringify({
         postId:id,
       })
-    }).then(res=>res.json()).then(result=>console.log(result))
+    }).then(res=>res.json()).then(result=> props.updateFunc(result));
 
   }
 
@@ -58,11 +59,13 @@ const Card = (props) => {
   const toggleClick = (id) => {
     if(liketoggle){
       setLikeToggle(false)
-      unlikePost(id)
+      unlikePost(id);
+
     }
     else{
-      setLikeToggle(true)
-      likePost(id)
+      setLikeToggle(true);
+      likePost(id);
+      console.log(props.id);
     }
 
     
