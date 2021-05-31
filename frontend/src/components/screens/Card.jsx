@@ -26,7 +26,7 @@ const Card = (props) => {
         "Authorization":"Bearer "+localStorage.getItem("jwt")
       }
     }).then(res=>res.json())
-    .then(result=>console.log(result))
+    .then(result=>props.updateHome(result))
   }
 
   const [comment, setComment] = useState(false);

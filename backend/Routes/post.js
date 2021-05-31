@@ -109,7 +109,7 @@ router.delete('/deletepost/:postId',login,(req,res)=>{
         {
             post.remove()
             .then(result=>{
-                res.json({message:"successfully deleted"})
+                res.json(result)
             }).catch(err=>console.log(err))
         }
     })
