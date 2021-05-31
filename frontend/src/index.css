@@ -26,6 +26,7 @@ body {
 
 button {
   height: 50px;
+  font-family: "Roboto", sans-serif;
 }
 
 .textArea {
@@ -93,10 +94,6 @@ a {
 
 .sidebar {
   height: 250px;
-}
-
-.posts {
-  margin-left: 165px;
 }
 
 .image {
