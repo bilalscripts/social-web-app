@@ -32,6 +32,7 @@ app.use(express.json()) // sending requst data to the json , it must be used bef
 
 app.use(require('./Routes/auth'))
 app.use(require('./Routes/post'))
+app.use(require('./Routes/user'))
 
 
 
