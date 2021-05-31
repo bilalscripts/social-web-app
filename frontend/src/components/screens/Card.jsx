@@ -13,8 +13,26 @@ import Threedotmenu from './Threedotmenu';
 const Card = (props) => {
 
   const [liketoggle, setLikeToggle] = useState(props.isLiked);
-  const [commentToggle, setCommentToggle] = useState(false);
+  
   const [commText, setCommText] = useState('');
+
+
+  const makeComment = (text, postId) =>{
+    fetch('/comment',{
+      method:"put",
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":"Bearer "+localStorage.getItem("jwt")
+      },
+      body:JSON.stringify({
+        postId,
+        text
+      })
+    }).then(res=>res.json()).then(result=>{
+      console.log(result)
+      props.updateFunc(result);
+    }).catch(err=>console.log(err))
+  }
   
 
 
@@ -68,9 +86,7 @@ const Card = (props) => {
     
   }
 
-  const toggleComtClick = () => {
-    setCommentToggle(!commentToggle);
-  }
+ 
 
 
 
@@ -96,30 +112,37 @@ const Card = (props) => {
               {props.isLiked ? (<button className='m-2 btn btn-outline-primary' onClick={()=>{toggleClick(props.id)}}><ThumbUpIcon /></button>) : (<button className='m-2 btn btn-outline-secondary' onClick={()=>{toggleClick(props.id)}}><ThumbUpAltOutlinedIcon /></button>)}
 
 
-              {commentToggle ?
+              {
                 (
-                  <form>
+                  <form onSubmit={(e)=>{e.preventDefault()
+                  makeComment(e.target[0].value,props.id)
+                  
+                  }}>
                     <div className='d-flex'>
-                      <button className='m-2 btn btn-outline-primary' onClick={toggleComtClick}><CommentOutlinedIcon /></button>
+                      <button className='m-2 btn btn-outline-primary' ><CommentOutlinedIcon /></button>
                       <input type='text' style={{ marginLeft: '100px' }} placeholder='comment here' onChange={(event) => { setCommText(event.target.value) }} className='form-control' />
-                      <button className='m-2 btn btn-outline-primary' onClick={() => {
-                        console.log(commText);
-                      }}><SendIcon /></button>
+                      
                     </div>
                   </form>
-                ) :
-                (
-                  <div>
-                    <button className=' m-2 btn btn-outline-primary' onClick={toggleComtClick}><CommentOutlinedIcon /></button>
-                  </div>
-                )
-              }
+                )       }
+              
+              
 
             </div>
           </div>
 
+            
         </div>
+        
       </div>
+
+            {
+                props.comments.map(record=>{
+                   return <h6> <span style={{fontWeight:"500"}}>{record.postedBy.name}</span>
+                  {record.text}
+                   </h6>
+                  })
+              }
 
     </>
   );
