@@ -23,9 +23,47 @@ router.get('/user/:id',login,(req,res)=>{
 })
 
 
-router.put('/follow',(req,res)=>{
-    User.findByIdAndUpdate()
+router.put('/follow',login,(req,res)=>{
+    User.findByIdAndUpdate(req.body.followid,{
+        $push:{followers:req.user._id}
+    },{
+        new:true
+    },(err,result)=>{
+        if(err){
+            return res.status(422).json({error:err})
+        }
+        User.findByIdAndUpdate(req.user._id,{
+            $push:{following:req.body.followid}
+        },{new:true}).select("-password").then(result=>{
+            res.json(result)
+        }).catch(err=>{
+            return res.status(422).json({error:err})
+        })
+    })
 })
+
+
+
+
+router.put('/unfollow',login,(req,res)=>{
+    User.findByIdAndUpdate(req.body.unfollowid,{
+        $push:{followers:req.user._id}
+    },{
+        new:true
+    },(err,result)=>{
+        if(err){
+            return res.status(422).json({error:err})
+        }
+        User.findByIdAndUpdate(req.user._id,{
+            $pull:{following:req.body.unfollowid}
+        },{new:true}).select("-password").then(result=>{
+            res.json(result)
+        }).catch(err=>{
+            return res.status(422).json({error:err})
+        })
+    })
+})
+
 
 
 module.exports =  router

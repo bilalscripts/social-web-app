@@ -1,14 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Homenav from  './Homenav';
 import {Link, useParams} from 'react-router-dom'
+import {UserContext} from '../../App';
+import { loadImage } from 'browser-image-compression';
 
 
 const Individualprfle = () => {
 
-  const [follow,setFollow] = useState(true)
   const {userid} = useParams();
   const [userProfile,setUserProfile] = useState(null)
+  const {state, dispatch} = useContext(UserContext);
   console.log(userid)
+  
+  
+  const checkStatus = async () =>{
+    const isFollowed = await state.following.includes(userid)
+    return isFollowed
+  }
+
+  const [follow,setFollow] = useState(state ? checkStatus : false )
 
   const clickedStatus = () => {
     setFollow(!follow);
@@ -22,8 +32,30 @@ const Individualprfle = () => {
         'Authorization':'Bearer '+localStorage.getItem('jwt')
       }
     }).then(res=>res.json())
-    .then(result=>setUserProfile(result))
+    .then(result=>setUserProfile(result)
+    )
   },[])
+
+
+  const followUser = () =>{
+    fetch('/follow',{
+      method:"put",
+      headers:{
+        "content-Type":"application/json",
+        "Authorization":"Bearer "+localStorage.getItem('jwt')
+      },
+      body:JSON.stringify({
+        followid:userid,
+
+      })
+    }).then(res=>res.json())
+    .then(data=>{
+      console.log(data)
+      dispatch({type:"UPDATE",payload:{
+        following:data.following,followers:data.followers}})
+        localStorage.setItem("user",JSON.stringify(data))
+    })
+  }
 
 
   
@@ -49,16 +81,20 @@ const Individualprfle = () => {
               <h3 className='m-4'>{userProfile.user.email}</h3>
               <Link className='m-4 fixed'> 
               {
-                follow ? <button onClick={clickedStatus} className='btn btn-primary text-center justify-content-center'><strong><h5>Follow</h5></strong></button> : 
+                follow ? <button onClick={()=>{
+                  followUser()
+                  clickedStatus()
+                }
+                } className='btn btn-primary text-center justify-content-center'><strong><h5>Follow</h5></strong></button> : 
                 <button onClick={clickedStatus} className='btn btn-primary text-center justify-content-center'><strong><h5>Unfollow</h5></strong></button> 
               }
               </Link> 
             <div/>
           </div>
           <div className='d-flex'>
-            <p style={{marginLeft:'50px',marginTop:'10px'}}><strong>postsCount</strong> posts:{userProfile.posts.length}</p>
-            <p style={{marginLeft:'50px',marginTop:'10px'}}><strong>followersCount</strong> followers</p>
-            <p style={{marginLeft:'50px',marginTop:'10px'}}><strong>followingCount</strong> following</p>
+            <p style={{marginLeft:'50px',marginTop:'10px'}}><strong>{userProfile.posts.length}</strong> posts</p>
+            <p style={{marginLeft:'50px',marginTop:'10px'}}><strong>{userProfile.user.followers.length}</strong> followers</p>
+            <p style={{marginLeft:'50px',marginTop:'10px'}}><strong>{userProfile.user.following.length}</strong> following</p>
           </div>
             
           <div>
