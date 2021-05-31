@@ -23,4 +23,9 @@ router.get('/user/:id',login,(req,res)=>{
 })
 
 
+router.put('/follow',(req,res)=>{
+    User.findByIdAndUpdate()
+})
+
+
 module.exports =  router

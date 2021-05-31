@@ -26,16 +26,7 @@ const Individualprfle = () => {
   },[])
 
 
-
-
-
-
-
-
-
   
-
-
 
   return(
     <>
