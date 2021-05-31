@@ -1,13 +1,17 @@
 import Card from './Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import Homenav from './Homenav';
+import {UserContext} from '../../App';
 
 
 const Home = (props) => {
   const history = useHistory();
   const [data,setData] = useState([]);
+  const {state,dispatch} = React.useContext(UserContext)
+  
+
     useEffect(()=>{
 
 
@@ -71,7 +75,8 @@ const Home = (props) => {
       data.map(item=>{
         return (
           <Card body={item.body} postedBy={item.postedBy.name} photo={item.photo} key={item._id} 
-          id={item._id} likes={item.likes} updateFunc={updateData}/>
+          id={item._id}  likes={item.likes} isLiked={item.likes.includes(state._id)} 
+          comments={item.comments} updateFunc={updateData}/>
         )
       })
     }

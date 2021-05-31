@@ -77,6 +77,31 @@ router.put('/unlike',login,(req,res)=>{
 })
 
 
+router.put('/comment',login,(req,res)=>{
+    const comment = {
+        text:req.body.text,
+        postedBy: req.user._id
+    }
+
+    Post.findByIdAndUpdate(req.body.postId,{
+        $push:{comments:comment}
+    },{
+        new:true
+    }).populate("comments.postedBy","_id name")
+    .exec((error,result)=>{
+        if(error){
+            return res.status(422).json({error})
+        }
+        else{
+                res.json(result)
+        }
+    })
+})
+
+
+
+
+
 
 
 

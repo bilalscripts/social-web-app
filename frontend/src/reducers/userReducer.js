@@ -1,7 +1,7 @@
-export const initilaState = null;
+export const initialState = null;
 
 export const reducer = (state, action)=>{
-    if(action.type==="User")
+    if(action.type==="USER")
     {
         return action.payload
     }
