@@ -69,8 +69,8 @@ const Home = (props) => {
         </div>
 
         <div className='col-md-8 bg-light post'>
-          <div className='border-bottom p-3'>
-          <button onClick={createPost}>Create Post </button>
+          <div className='border-bottom p-3 text-center'>
+          <button onClick={createPost} className='btn btn-primary' style={{width:'200px'}}>Create Post </button>
           </div>
         </div>
         <div className='border-light border-bottom my-4'></div>
