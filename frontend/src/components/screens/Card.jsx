@@ -19,6 +19,7 @@ const Card = (props) => {
   const {state, dispatch} = useContext(UserContext);
 
   const deletePost = (postid) =>{
+    console.log("delete is called")
     fetch(`/deletepost/${postid}`,{
       method:"delete",
       headers:{
@@ -116,7 +117,7 @@ const Card = (props) => {
           <div className='col-md-8 bg-light post'>
             <div className='border-bottom my-3 p-2'>
               <div className='float-end'>
-                {(props.postedById === state._id) && <button onClick={deletePost(props.id)}>delete</button> }
+                {(props.postedById === state._id) && <button onClick={()=>{deletePost(props.id)}}>delete</button> }
               </div>
               <Link to='/indiv' className="btn">{props.postedBy}</Link>
               <p className='my-3'>{props.body}</p>

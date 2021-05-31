@@ -16,8 +16,6 @@ let count = 4;
 
 const Profile = () => {
   
-  
-
   const [isOpen,setIsOpen] = useState(false);
   const [mypics,setPics] = useState([])
   const [img, setImg] = useState({

@@ -108,7 +108,7 @@ router.delete('/deletepost/:postId',login,(req,res)=>{
         if(post.postedBy._id.toString()===req.user._id.toString())
         {
             post.remove()
-            .then(res=>{
+            .then(result=>{
                 res.json({message:"successfully deleted"})
             }).catch(err=>console.log(err))
         }
