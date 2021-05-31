@@ -5,7 +5,6 @@ import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import CommentOutlinedIcon from '@material-ui/icons/CommentOutlined';
 import SendIcon from '@material-ui/icons/Send';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Threedotmenu from './Threedotmenu';
 import {UserContext} from '../../App';
 
 
@@ -22,8 +21,8 @@ const Card = (props) => {
   const deletePost = (postid) =>{
     fetch(`/deletepost/${postid}`,{
       method:"delete",
-      header:{
-        "Authorization":"Bearer "+localStorage.getItem('jwt')
+      headers:{
+        "Authorization":"Bearer "+localStorage.getItem("jwt")
       }
     }).then(res=>res.json())
     .then(result=>console.log(result))
