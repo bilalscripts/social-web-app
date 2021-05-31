@@ -13,9 +13,7 @@ body {
   width: 75%;
   display: flex;
   margin: auto;
-  margin-top: 10px;
   justify-content: center;
-  padding: 10px;
 }
 
 .andchor {
@@ -160,4 +158,8 @@ img {
   display: grid;
   justify-content: center;
   align-items: center;
+}
+
+.comment {
+  margin-left: 10px;
 }
