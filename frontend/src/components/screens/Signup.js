@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from "../Navbar";
-import M from 'materialize-css'
 import '../../index.css';
 import {useHistory} from  'react-router-dom'
 import validator from 'validator';
 import {toast} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
-
+import 'react-toastify/dist/ReactToastify.css';
+import IconButton from '@material-ui/core/IconButton';
+import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
+import Img from '../images/dp.png';
+import imageCompression from "browser-image-compression";
 
 
 toast.configure();
@@ -17,6 +19,13 @@ const Signup = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [img, setImg] = useState({
+    compressedLink:
+      "",
+    originalImage: "",
+    originalLink: "",
+    uploadImage: false
+  })
 
   const postData = () => {
 
@@ -49,6 +58,45 @@ const Signup = () => {
 
   }
 
+
+  const selectImage = e => {
+    const imageFile = e.target.files[0];
+    //console.log(imageFile);
+    if (imageFile.size / 1024 / 1024 <= 50) {
+      setImg({
+        originalLink: URL.createObjectURL(imageFile),
+        originalImage: imageFile,
+        outputFileName: imageFile.name,
+        uploadImage: true
+      });
+    } else {
+      alert('Select Image upto 5 Mb');
+      return 0;
+    }
+
+  };
+
+
+  const compressUpload = () => {
+
+    const options = {
+      maxSizeMB: 0.5,
+      maxWidthOrHeight: 200,
+      useWebWorker: true
+    };
+    
+    img.originalImage? (
+      imageCompression(img.originalImage, options).then(x => {
+        const link = URL.createObjectURL(x);
+        console.log('image after compression: ',x);
+      })
+    ) : (
+      toast.error('image or title is missing ')
+    )
+    return 1;
+  };
+
+
   return (
     <>
       <Navbar />
@@ -58,14 +106,38 @@ const Signup = () => {
 
             <h2 className='acc p-4 heading'>Create Account</h2>
 
-            
+            <div className='text-center popupitems'>
+                
+                {
+                  img.originalLink ? (
+                    <img src = {img.originalLink} alt='imgaeHere' height="200px" width="200px" id='openImage'/>
+                  ) : (
+                    <img src = {Img} alt='imgaeHere' height="200px" width="200px" id='openImage'/>
+                  )
+                
+                }
+
+                
+                <input accept="image/*" id="icon-button-file"
+                  type="file" style={{ display: 'none' }} 
+                  onChange={e => selectImage(e)}
+                  />
+                  <label htmlFor="icon-button-file">
+                  <IconButton color="primary" aria-label="upload picture" 
+                  component="span">
+                    <PhotoCameraIcon color="primary" style={{ fontSize: 40 }}/>
+                  </IconButton>
+                </label>
+
+              </div>
+
 
               <div className='row'>
                 <TextField id="filled-basic" label="Name" variant="filled"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
-              </div>
+            </div>
 
               <div className='row'>
                 <TextField id="filled-basic" label="Email" variant="filled"

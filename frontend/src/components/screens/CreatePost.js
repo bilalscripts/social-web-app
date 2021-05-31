@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Homenav from './Homenav';
-import M from 'materialize-css';
 import imageCompression from "browser-image-compression";
 import Card from "react-bootstrap/Card";
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import IconButton from '@material-ui/core/IconButton';
+import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 
 toast.configure();
 
@@ -135,13 +136,19 @@ const Createpost = () => {
               <textarea placeholder='Whats on your mind ?' onChange={(event) => { setBody(event.target.value) }} value={body} className='textAreaa my-3 p-3'></textarea>
 
               <div>
-                <h4 className='m-2 mb-3'>Select Image</h4>
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="btn btn-secondary"
+                <div className='text-center d-flex'>
+                <h4 className='m-3'>Select Image</h4>
+                  <input accept="image/*" id="icon-button-file"
+                  type="file" style={{ display: 'none' }} 
                   onChange={e => selectImage(e)}
-                />
+                  />
+                  <label htmlFor="icon-button-file">
+                  <IconButton color="primary" aria-label="upload picture" 
+                  component="span">
+                    <PhotoCameraIcon style={{ fontSize: 40 }}/>
+                  </IconButton>
+                </label>
+                </div>
                 {
                   img.originalLink ? (
                     <div className="col-md-4 offset-3 my-4">

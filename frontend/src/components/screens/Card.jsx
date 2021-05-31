@@ -16,6 +16,7 @@ const Card = (props) => {
   const [liketoggle, setLikeToggle] = useState(props.isLiked);
   
   const [commText, setCommText] = useState('');
+<<<<<<< HEAD
   const {state, dispatch} = useContext(UserContext);
 
   const deletePost = (postid) =>{
@@ -27,6 +28,9 @@ const Card = (props) => {
     }).then(res=>res.json())
     .then(result=>console.log(result))
   }
+=======
+  const [comment, setComment] = useState(false);
+>>>>>>> 7454ab77e82bc7ce0c32c6705985c1e29e0589c2
 
 
   const makeComment = (text, postId) =>{
@@ -69,6 +73,7 @@ const Card = (props) => {
 
 
   const unlikePost = (id) =>{
+
     fetch('/unlike',{
       method:'put',
       headers:{
@@ -78,7 +83,7 @@ const Card = (props) => {
       body:JSON.stringify({
         postId:id,
       })
-    }).then(res=>res.json()).then(result=>console.log(result))
+    }).then(res=>res.json()).then(result=> props.updateFunc(result));
 
   }
 
@@ -88,11 +93,13 @@ const Card = (props) => {
   const toggleClick = (id) => {
     if(liketoggle){
       setLikeToggle(false)
-      unlikePost(id)
+      unlikePost(id);
+
     }
     else{
-      setLikeToggle(true)
-      likePost(id)
+      setLikeToggle(true);
+      likePost(id);
+      console.log(props.id);
     }
 
     
@@ -131,28 +138,45 @@ const Card = (props) => {
                   
                   }}>
                     <div className='d-flex'>
-                      <button className='m-2 btn btn-outline-primary' ><CommentOutlinedIcon /></button>
+                    <button className='m-2 btn btn-outline-primary' onClick={() => {setComment(!comment) }}><CommentOutlinedIcon /></button>
                       <input type='text' style={{ marginLeft: '100px' }} placeholder='comment here' onChange={(event) => { setCommText(event.target.value) }} className='form-control' />
                       
                     </div>
                   </form>
-                )       }
+                )
+              }
               
             </div>
           </div>
-
-            
         </div>
-        
+
+
+                      {
+                        comment ? (
+                          <button className='m-2 btn btn-outline-primary' onClick={() => {setComment(!comment) }}><CommentOutlinedIcon /></button>,
+                          <div className='row' data-aos="fade-down">
+                            <div className='col-md-4 bg-light post'>
+                                {
+                                  props.comments.map(record=>{
+                                    return (
+                                      <>
+                                        <h4>personNameHere</h4>
+                                        <h6> <span style={{fontWeight:"500",width:''}} className='border-bottom comment'>{record.postedBy.name}</span>{record.text}</h6>
+                                      </>
+                                    )
+                                    })
+                                }
+                          </div>
+                          </div>
+                        ) : (
+                          <>
+                          </>
+                        ) 
+                      }
+
       </div>
 
-            {
-                props.comments.map(record=>{
-                   return <h6> <span style={{fontWeight:"500"}}>{record.postedBy.name}</span>
-                  {record.text}
-                   </h6>
-                  })
-              }
+            
 
     </>
   );
