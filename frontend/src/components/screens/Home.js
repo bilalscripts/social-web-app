@@ -69,14 +69,14 @@ const Home = (props) => {
         </div>
         <div className='border-light border-bottom my-4'></div>
         </div>
-      </div>
+    </div>
 
     {
       data.map(item=>{
         return (
           <Card body={item.body} postedBy={item.postedBy.name} photo={item.photo} key={item._id} 
           id={item._id}  likes={item.likes} isLiked={item.likes.includes(state._id)} 
-          comments={item.comments} updateFunc={updateData}/>
+          comments={item.comments} postedById={item.postedBy._id} updateFunc={updateData}/>
         )
       })
     }

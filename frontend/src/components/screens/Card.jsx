@@ -16,7 +16,7 @@ const Card = (props) => {
   const [liketoggle, setLikeToggle] = useState(props.isLiked);
   
   const [commText, setCommText] = useState('');
-<<<<<<< HEAD
+
   const {state, dispatch} = useContext(UserContext);
 
   const deletePost = (postid) =>{
@@ -28,9 +28,9 @@ const Card = (props) => {
     }).then(res=>res.json())
     .then(result=>console.log(result))
   }
-=======
+
   const [comment, setComment] = useState(false);
->>>>>>> 7454ab77e82bc7ce0c32c6705985c1e29e0589c2
+
 
 
   const makeComment = (text, postId) =>{
@@ -117,7 +117,7 @@ const Card = (props) => {
           <div className='col-md-8 bg-light post'>
             <div className='border-bottom my-3 p-2'>
               <div className='float-end'>
-                {props.postedBy._id === state._id}
+                {(props.postedById === state._id) && <button onClick={deletePost(props.id)}>delete</button> }
               </div>
               <Link to='/indiv' className="btn">{props.postedBy}</Link>
               <p className='my-3'>{props.body}</p>
