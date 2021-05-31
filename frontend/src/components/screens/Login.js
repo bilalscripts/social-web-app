@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import validator from 'validator';
-import M from 'materialize-css'
 import {UserContext} from '../../App';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
@@ -73,8 +72,8 @@ const Login = () => {
       <div className='container-fluid box'>
         <div className='row'>
           <div className='col-md-5 p-3 textArea'>
-            <h1 className='text-primary'>Chaos 🔥</h1>
-            <h3>Bat bat py Treat 😆</h3>
+            <h1 className='text-light'>Chaos 🔥</h1>
+            <h3 className='text-light'>Bat bat py Treat 😆</h3>
           </div>
           <div className='col-md-5 bg-light p-3 bg-secondary box shadow'>
 

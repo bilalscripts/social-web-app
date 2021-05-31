@@ -11,7 +11,11 @@ import Profile from './components/screens/Profile'
 import Createpost from './components/screens/CreatePost';
 import {reducer, initilaState} from './reducers/userReducer';
 import Individualprfle from './components/screens/Individualprfle';
+
+
+
 export const UserContext = createContext();
+
 
 
 
@@ -31,7 +35,8 @@ useEffect(()=>{
   }
 },[])
   return(
-    <Switch>
+
+  <Switch>
       
     <Route exact path='/' component={Home} />
     <Route exact path='/forgot' component={FgtPass} />
@@ -51,17 +56,20 @@ const App = () => {
 
   const [state, dispatch] = useReducer(reducer,initilaState);
   return(
+    <div>
+    
     <UserContext.Provider value={{state,dispatch}}>
     <BrowserRouter>
-
-      <Routing />
+    
+        <Routing />
+      
       
       
       </BrowserRouter>
       </UserContext.Provider>
-
     
-   
+    
+   </div>
   );
 }
 
