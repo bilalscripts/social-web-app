@@ -9,9 +9,9 @@ import Signup from './components/screens/Signup';
 import Home from './components/screens/Home'
 import Profile from './components/screens/Profile'
 import Createpost from './components/screens/CreatePost';
-import {reducer, initilaState} from './reducers/userReducer';
+import {reducer, initialState} from './reducers/userReducer';
 import Individualprfle from './components/screens/Individualprfle';
-export const UserContext = createContext();
+export const UserContext = createContext()
 
 
 
@@ -47,9 +47,8 @@ useEffect(()=>{
   )
 }
 
-const App = () => {
-
-  const [state, dispatch] = useReducer(reducer,initilaState);
+function App(){
+  const [state,dispatch] = useReducer(reducer,initialState)
   return(
     <UserContext.Provider value={{state,dispatch}}>
     <BrowserRouter>

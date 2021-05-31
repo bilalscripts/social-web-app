@@ -12,7 +12,7 @@ import Threedotmenu from './Threedotmenu';
 
 const Card = (props) => {
 
-  const [liketoggle, setLikeToggle] = useState(false);
+  const [liketoggle, setLikeToggle] = useState(props.isLiked);
   const [commentToggle, setCommentToggle] = useState(false);
   const [commText, setCommText] = useState('');
   
@@ -93,7 +93,7 @@ const Card = (props) => {
             <h6>Likes: {props.likes.length}</h6>
 
             <div className='p-2 d-flex justify-content-center'>
-              {liketoggle ? (<button className='m-2 btn btn-outline-primary' onClick={()=>{toggleClick(props.id)}}><ThumbUpIcon /></button>) : (<button className='m-2 btn btn-outline-secondary' onClick={()=>{toggleClick(props.id)}}><ThumbUpAltOutlinedIcon /></button>)}
+              {props.isLiked ? (<button className='m-2 btn btn-outline-primary' onClick={()=>{toggleClick(props.id)}}><ThumbUpIcon /></button>) : (<button className='m-2 btn btn-outline-secondary' onClick={()=>{toggleClick(props.id)}}><ThumbUpAltOutlinedIcon /></button>)}
 
 
               {commentToggle ?
