@@ -119,7 +119,7 @@ const Card = (props) => {
               <div className='float-end'>
                 {(props.postedById === state._id) && <button onClick={()=>{deletePost(props.id)}}>delete</button> }
               </div>
-              <Link to='/indiv' className="btn">{props.postedBy}</Link>
+              <Link to={`profile/${props.postedById}`} className="btn">{props.postedBy}</Link>
               <p className='my-3'>{props.body}</p>
             </div>
             <div className='image border-bottom p-2'>

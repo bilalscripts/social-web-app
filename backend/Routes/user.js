@@ -6,11 +6,11 @@ const login = require('../middleware/login')
 const User = mongoose.model("User") 
 
 
-router.get('/user/:id',(req,res)=>{
-    User.findOne({_id:req.param.id})
+router.get('/user/:id',login,(req,res)=>{
+    User.findOne({_id:req.params.id})
     .select("-password")
     .then(user=>{
-        Post.find({postedBy:req.param.id}).populate("postedBy","_id name")
+        Post.find({postedBy:req.params.id}).populate("postedBy","_id name")
         .exec((err,posts)=>{
             if(err){
                 return res.status(422).json({error:err})

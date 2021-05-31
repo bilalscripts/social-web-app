@@ -16,6 +16,7 @@ export const UserContext = createContext()
 
 
 
+
 const Routing = ()=>{
   const history = useHistory();
   const {state,dispatch} = useContext(UserContext)
@@ -24,7 +25,7 @@ useEffect(()=>{
   if(user)
   {
     dispatch({type:"USER",payload:user})
-    history.push('/')
+
   }
   else{
     history.push('/login')
@@ -39,7 +40,7 @@ useEffect(()=>{
     <Route exact path='/login' component={Login} />
     <Route exact path='/profile' component={Profile} />
     <Route exact path='/create' component={Createpost} />
-    <Route exact path='/indiv' component={Individualprfle} />
+    <Route exact path='/profile/:userid' component={Individualprfle} />
 
 
   </Switch>
