@@ -1,11 +1,12 @@
 import { Link, useHistory } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import CommentOutlinedIcon from '@material-ui/icons/CommentOutlined';
 import SendIcon from '@material-ui/icons/Send';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Threedotmenu from './Threedotmenu';
+import {UserContext} from '../../App';
 
 
 
@@ -15,6 +16,17 @@ const Card = (props) => {
   const [liketoggle, setLikeToggle] = useState(props.isLiked);
   
   const [commText, setCommText] = useState('');
+  const {state, dispatch} = useContext(UserContext);
+
+  const deletePost = (postid) =>{
+    fetch(`/deletepost/${postid}`,{
+      method:"delete",
+      header:{
+        "Authorization":"Bearer "+localStorage.getItem('jwt')
+      }
+    }).then(res=>res.json())
+    .then(result=>console.log(result))
+  }
 
 
   const makeComment = (text, postId) =>{
@@ -98,7 +110,7 @@ const Card = (props) => {
           <div className='col-md-8 bg-light post'>
             <div className='border-bottom my-3 p-2'>
               <div className='float-end'>
-                <Threedotmenu />
+                {props.postedBy._id === state._id}
               </div>
               <Link to='/indiv' className="btn">{props.postedBy}</Link>
               <p className='my-3'>{props.body}</p>
