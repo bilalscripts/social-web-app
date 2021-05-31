@@ -126,8 +126,6 @@ const Card = (props) => {
                   </form>
                 )       }
               
-              
-
             </div>
           </div>
 
