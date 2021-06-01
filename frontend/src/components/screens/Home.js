@@ -64,7 +64,7 @@ const Home = (props) => {
         
         <div className='row'>
 
-        <div className='col-md-8 bg-light post'>
+        <div className='col-md-8 post' style={{backgroundColor:'#23395b'}}>
          
           <div>
           <InputGroup className="p-3" size='lg'>
@@ -79,16 +79,15 @@ const Home = (props) => {
                 setUser(e.target.value)
               }}
             />
-            <Button variant="primary"><SearchIcon/></Button>
+            <Button className='text-light' variant="primary"><SearchIcon/></Button>
           </InputGroup>
             
           </div>
-          <div className='border-bottom p-3 text-center'>
-            <button onClick={createPost} className='btn btn-primary' style={{width:'200px'}}>Create Post </button>
+          <div className='p-3 text-center'>
+            <button onClick={createPost} className='btn btn-warning' style={{width:'200px'}}>Create Post </button>
           </div>
         </div>
 
-        <div className=' col-md-8 border-light border-bottom my-4'></div>
         </div>
     </div>
 

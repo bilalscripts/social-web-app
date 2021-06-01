@@ -12,7 +12,7 @@ import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import imageCompression from "browser-image-compression";
 import {toast} from 'react-toastify';
 import {UserContext} from '../../App';
-
+import {InputGroup,FormControl} from "react-bootstrap";
 let count = 4;
 
 const Profile = () => {
@@ -120,7 +120,7 @@ const Profile = () => {
           
           <div className='d-flex'>
             <h3 className='m-4'>{state ? state.name : "wait.." }</h3>
-            <Link className='m-4 fixed'><Button variant="contained" onClick={togglePopus}>Edit Profile</Button></Link> 
+            <Link className='m-4 fixed'><button className='btn btn-outline-warning' variant="contained"  onClick={togglePopus}>Edit Profile</button></Link> 
             {isOpen && <PopUpDailoge
               togglePopus = {togglePopus} content={<>
                 
@@ -143,13 +143,27 @@ const Profile = () => {
                   <label htmlFor="icon-button-file">
                   <IconButton color="primary" aria-label="upload picture" 
                   component="span">
-                    <PhotoCameraIcon color="primary" style={{ fontSize: 40 }}/>
+                    <PhotoCameraIcon className='btn-outline-light' style={{ fontSize: 40}}/>
                   </IconButton>
                 </label>
                   
                 </div>
                 <div className='row'>
-                  <TextField id="filled-basic"  label="New name" variant="filled" />
+                <InputGroup className="p-3" size='lg'>
+            <FormControl
+              aria-label="Example text with button addon"
+              aria-describedby="basic-addon1"
+              placeholder='Password' 
+
+              onFocus = {(e) => (e.target.placeholder = '')}
+              onBlur = {(e) => e.target.placeholder = 'Password'}
+              onChange = {(e) => {
+                
+              }}
+            />
+            
+          </InputGroup>
+                  
                 </div>
 
                 
@@ -158,11 +172,11 @@ const Profile = () => {
                 <br className='text-dark'></br>    
 
                 <div className='row' id='accbtn'>
-                  <button className='btn btn-success' onClick={()=>{
+                  <button className='btn btn-warning' onClick={()=>{
                     updateData()
                     togglePopus()
                     
-                    }}>Edit</button>
+                    }}>Save</button>
                 </div>     
               </>}
               

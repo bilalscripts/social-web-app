@@ -58,12 +58,12 @@ const Home = (props) => {
         <Homenav />
         <div className='row'>
 
-        <div className='col-md-8 bg-light post'>
-          <div className='border-bottom p-3 text-center'>
-          <button onClick={createPost} className='btn btn-primary' style={{width:'200px'}}>Create Post </button>
+        <div className='col-md-8 post' style={{backgroundColor:'#23395b'}}>
+          <div className='p-3 text-center'>
+          <button onClick={createPost} className='btn btn-warning' style={{width:'200px'}}>Create Post </button>
           </div>
         </div>
-        <div className='border-light border-bottom my-4'></div>
+        
         </div>
     </div>
 

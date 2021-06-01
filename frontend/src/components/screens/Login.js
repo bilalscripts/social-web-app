@@ -3,10 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import validator from 'validator';
-import M from 'materialize-css'
 import {UserContext} from '../../App';
 import {toast} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.css';
+import {InputGroup,FormControl} from "react-bootstrap";
 
 toast.configure();
 const Login = () => {
@@ -73,43 +73,63 @@ const Login = () => {
       <div className='container-fluid'>
         <div className='row'>
           <div className='col-md-5 p-3 textArea'>
-            <h1 className='text-primary'>Chaos 🔥</h1>
-            <h3>Bat bat py Treat 😆</h3>
+            <h1 className='text-white'>Chaos 🔥</h1>
+            <h3 className='text-white'>Bat bat py Treat 😆</h3>
           </div>
-          <div className='col-md-5 bg-light p-3 bg-secondary box shadow'>
+          <div className='col-md-5 p-3 box shadow'>
 
             <div className='row'>
-              <h1 className=''>Login</h1>
+              <h1 className='text-light'>Login</h1>
             </div>
 
             <div className='row my-5'>
-              <TextField id="filled-basic" label="Email" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                variant="filled" />
+            <InputGroup className="p-3" size='lg'>
+            <FormControl
+              aria-label="Example text with button addon"
+              aria-describedby="basic-addon1"
+              placeholder='Email' 
+
+              onFocus = {(e) => (e.target.placeholder = '')}
+              onBlur = {(e) => e.target.placeholder = 'Email'}
+              onChange = {(e) => {
+                setEmail(e.target.value)
+              }}
+            />
+            
+          </InputGroup>
             </div>
 
             <div className='row'>
-              <TextField type="password" label="Password" variant="filled"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-
-              />
+            <InputGroup className="p-3" size='lg'>
+            <FormControl
+              aria-label="Example text with button addon"
+              aria-describedby="basic-addon1"
+              placeholder='Password' 
+              type='password'
+              onFocus = {(e) => (e.target.placeholder = '')}
+              onBlur = {(e) => e.target.placeholder = 'Password'}
+              onChange = {(e) => {
+                setPassword(e.target.value)
+              }}
+            />
+            
+          </InputGroup>
+              
             </div>
 
-            <div className='andchor'>
-              <Link to="/forgot"> Forgot Password </Link>
+            <div>
+              <Link className=' andchor text-muted' to="/forgot"> Forgot Password </Link>
             </div>
 
 
             <div className='row'>
-              <button className='btn btn-primary' onClick={postData} >Login</button>
+              <button className='btn btn-warning'  onClick={postData} >Login</button>
             </div>
 
             <br className='text-dark'></br>
 
             <div className='row' id='accbtn'>
-              <button className='btn btn-success' onClick={createNewAcc} >Create New Account</button>
+              <button className=' btn btn-outline-warning' onClick={createNewAcc} >Create New Account</button>
             </div>
 
 

@@ -117,28 +117,29 @@ const Card = (props) => {
     <>
       <div className=' container-fluid posts'>
         <div className='row'>
-          <div className='col-md-8 bg-light post'>
-            <div className='border-bottom my-3 p-2'>
+          <div className='col-md-8 post' style={{backgroundColor:'#23395b'}}>
+            <div className='my-3 p-2'>
               <div className='float-end'>
                 {(props.postedById === state._id) && <button className='btn btn-transparent' onClick={() => { deletePost(props.id) }}><DeleteRoundedIcon /></button>}
               </div>
-              <Link to={ (props.postedById !== state._id) ?`profile/${props.postedById}` :`profile` } className="btn">{props.postedBy}</Link>
-              <p className='my-3'>{props.body}</p>
+              <Link style={{color:'white', fontSize:'35px'}} to={ (props.postedById !== state._id) ?`profile/${props.postedById}` :`profile` } className="btn">{props.postedBy}</Link>
+              <p style={{color:'white',fontSize:'25px'}} className='my-3'>{props.body}</p>
             </div>
-            <div className='image border-bottom p-2'>
+            <div className='image p-2'>
               <img src={props.photo} alt='thisImage' />
             </div>
-            <h6>Likes: {props.likes.length}</h6>
+            <h6 style={{color:'white',fontSize:'15px'}}>{props.likes.length} people Liked</h6>
+            <h6 style={{color:'white',fontSize:'15px'}}>{props.comments.length} people Commented</h6>
 
             <div className='p-2 d-flex justify-content-center'>
-              {props.isLiked ? (<button className='m-2 btn btn-outline-primary' onClick={() => { toggleClick(props.id) }}><ThumbUpIcon /></button>) : (<button className='m-2 btn btn-outline-secondary' onClick={() => { toggleClick(props.id) }}><ThumbUpAltOutlinedIcon /></button>)}
+              {props.isLiked ? (<button className='m-2 btn btn-outline-warning' onClick={() => { toggleClick(props.id) }}><ThumbUpIcon /></button>) : (<button className='m-2 btn btn-outline-light' onClick={() => { toggleClick(props.id) }}><ThumbUpAltOutlinedIcon /></button>)}
 
 
               {
                 (<>
                   
                     <div className='d-flex'>
-                    <button className='m-2 btn btn-outline-primary' onClick={() => { setComment(!comment)}}><CommentOutlinedIcon /></button>
+                    <button className='m-2 btn btn-outline-light' onClick={() => { setComment(!comment)}}><CommentOutlinedIcon /></button>
                       <input type='text' value={commText} style={{ marginLeft: '100px' }} placeholder='comment here' onKeyPress={
                         (e) => {
                           e.key === 'Enter' ? makeComment(commText,props.id) : console.log('enter not pressed')

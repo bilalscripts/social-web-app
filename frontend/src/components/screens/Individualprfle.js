@@ -125,12 +125,12 @@ const Individualprfle = () => {
                 follow ? <button onClick={()=>{
                   followUser()
                 }
-                } className='btn btn-primary text-center justify-content-center'><strong><h5>Follow</h5></strong></button> : 
+                } className='btn btn-outline-warning text-center justify-content-center'><strong><h5>Follow</h5></strong></button> : 
                 
                 
                 <button onClick={()=>{
                   unfollowUser()
-                }} className='btn btn-primary text-center justify-content-center'><strong><h5>Unfollow</h5></strong></button> 
+                }} className='btn btn-warning text-center justify-content-center'><strong><h5>Unfollow</h5></strong></button> 
               }
               </Link> 
             <div/>
@@ -154,11 +154,13 @@ const Individualprfle = () => {
         {
           userProfile.posts.map(item=>{
             return (
-              <div className='col-md-2 m-3 bg-light' style={{width:'320px', height:'300px', borderRadius:'10px'}}>
-                  <div className='text-center'>
-                    <img src={item.photo} alt='thisImage' className='my-3' width='250px' height='250px'/>
-                  </div>
-              </div>
+              <div className='col-md-2 m-3 ' style={{width:'320px', height:'400px', borderRadius:'10px',backgroundColor:'#23395b'}}>
+            <div className='text-center'>
+            <img src={item.photo} alt='thisImage' className='my-3' width='250px' height='250px'/>
+            </div>
+            
+            <p className='paragraph'>{item.body}</p>
+        </div> 
             )
           })
         }

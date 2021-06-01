@@ -1,12 +1,14 @@
 body {
-  background: rgb(227, 230, 236);
+  background-color: #161925;
   width: 100%;
   height: 100%;
+  color: #fff;
 }
 
 .box {
   margin-top: 100px;
   border-radius: 10px;
+  background-color: #23395b;
 }
 
 .row {
@@ -22,7 +24,8 @@ body {
   display: flex;
   margin: auto;
   margin-top: 10px;
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
 }
 
 button {
@@ -32,7 +35,7 @@ button {
 
 .textArea {
   margin: auto;
-  background-color: rgb(227, 230, 236);
+  background-color: transparent;
 }
 
 h1 {
@@ -123,9 +126,9 @@ img {
   position: relative;
   width: 25%;
   margin: 0 auto;
-  height: 75vh;
+  height: 60vh;
   margin-top: calc(100vh - 85vh - 20px);
-  background: #fff;
+  background-color: #23395b;
   border-radius: 4px;
   padding: 20px;
   border: 1px solid #999;
@@ -140,7 +143,7 @@ img {
   position: fixed;
   right: calc(38% - 10px);
   top: calc(100vh - 85vh - 20px);
-  background: #ededed;
+  background: #161925;
   width: 25px;
   height: 25px;
   border-radius: 50%;
@@ -163,4 +166,7 @@ img {
 .paragraph {
   font-family: "Roboto", sans-serif;
   font-size: 20px;
+}
+
+.icon {
 }
