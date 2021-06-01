@@ -76,7 +76,7 @@ const Login = () => {
             <h1 className='text-white'>Chaos 🔥</h1>
             <h3 className='text-white'>Bat bat py Treat 😆</h3>
           </div>
-          <div className='col-md-5 p-3 box shadow'>
+          <div className='col-md-5 p-3 box shadow' style={{height:'650px'}}>
 
             <div className='row'>
               <h1 className='text-light'>Login</h1>
@@ -131,10 +131,6 @@ const Login = () => {
             <div className='row' id='accbtn'>
               <button className=' btn btn-outline-warning' onClick={createNewAcc} >Create New Account</button>
             </div>
-
-
-
-
           </div>
         </div>
       </div>
