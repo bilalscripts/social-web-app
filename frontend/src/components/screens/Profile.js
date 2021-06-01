@@ -23,11 +23,7 @@ const Profile = () => {
   
 
   const [img, setImg] = useState({
-    compressedLink:
-      "",
-    originalImage: "",
-    originalLink: "",
-    uploadImage: false
+    compressedLink : "",
   })
   
   
@@ -51,42 +47,28 @@ const Profile = () => {
 
   const selectImage = e => {
     const imageFile = e.target.files[0];
-    //console.log(imageFile);
-    if (imageFile.size / 1024 / 1024 <= 50) {
-      setImg({
-        originalLink: URL.createObjectURL(imageFile),
-        originalImage: imageFile,
-        outputFileName: imageFile.name,
-        uploadImage: true
-      });
-    } else {
-      alert('Select Image upto 5 Mb');
-      return 0;
-    }
-
-  };
-
-
-  const compressUpload = () => {
-
+    console.log(imageFile.size/1024/1024);
     const options = {
       maxSizeMB: 0.5,
       maxWidthOrHeight: 200,
       useWebWorker: true
     };
     
-    img.originalImage? (
-      imageCompression(img.originalImage, options).then(x => {
-        const link = URL.createObjectURL(x);
-        console.log('image after compression: ',x);
+
+    if (imageFile.size / 1024 / 1024 <= 10) {
+      imageCompression(imageFile, options).then(x => {
+        console.log(x.size/1024/1024);
+        setImg({
+          compressedLink : URL.createObjectURL(x),
+          compressedBlob : x,
+        });
       })
-    ) : (
-      toast.error('image or title is missing ')
-    )
-    return 1;
+    } else {
+      toast.error('Select Image upto 10 Mb',{position:toast.POSITION.TOP_RIGHT});
+      return 0;
+    }
+
   };
-
-
 
 
 
@@ -113,8 +95,8 @@ const Profile = () => {
                 <div className='text-center popupitems'>
                 
                 {
-                  img.originalLink ? (
-                    <img src = {img.originalLink} alt='imgaeHere' height="200px" width="200px" id='openImage'/>
+                  img.compressedLink ? (
+                    <img src = {img.compressedLink} alt='imgaeHere' height="200px" width="200px" id='openImage'/>
                   ) : (
                     <img src = {Img} alt='imgaeHere' height="200px" width="200px" id='openImage'/>
                   )
@@ -176,7 +158,7 @@ const Profile = () => {
               
               mypics.map((item)=>{
                 
-                return <Profilecards url={item.photo}/> ;
+                return <Profilecards url={item.photo} body={item.body}/> ;
 
               })
             }

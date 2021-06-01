@@ -62,8 +62,8 @@ const Home = (props) => {
           
           <Link to='/' className="navbar-brand d-flex p-2 text-dark ">Home</Link>
           <Link to='/profile' className="navbar-brand d-flex p-2 text-dark ">Profile </Link>
-          <Link to='/home' className="navbar-brand d-flex p-2 text-dark my-2">Following<span className="badge badge-light">4</span></Link>
-          <Link to='/home' className="navbar-brand d-flex p-2 text-dark ">Followers</Link>
+          <Link to='/profile' className="navbar-brand d-flex p-2 text-dark my-2">Following<span className="badge badge-light">4</span></Link>
+          <Link to='/profile' className="navbar-brand d-flex p-2 text-dark ">Followers</Link>
 
 
         </div>

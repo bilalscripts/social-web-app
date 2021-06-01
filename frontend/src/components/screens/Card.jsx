@@ -136,16 +136,18 @@ const Card = (props) => {
 
               {
                 (<>
-                  <form onSubmit={(e) => {
-                    e.preventDefault()
-                    makeComment(e.target[0].value, props.id)
-                  }}>
+                  
                     <div className='d-flex'>
-                      <input type='text' value={commText} style={{ marginLeft: '100px' }} placeholder='comment here' onChange={(event) => { setCommText(event.target.value) }} className='form-control' />
+                    <button className='m-2 btn btn-outline-primary' onClick={() => { setComment(!comment)}}><CommentOutlinedIcon /></button>
+                      <input type='text' value={commText} style={{ marginLeft: '100px' }} placeholder='comment here' onKeyPress={
+                        (e) => {
+                          e.key === 'Enter' ? makeComment(commText,props.id) : console.log('enter not pressed')
+                        }
+                      } onChange={(event) => { setCommText(event.target.value) }} className='form-control' />
                     
                     </div>
-                  </form>
-                  <button className='m-2 btn btn-outline-primary' onClick={() => { setComment(!comment) }}><CommentOutlinedIcon /></button>
+                  
+                  
                   </>
 
                 )

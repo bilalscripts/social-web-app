@@ -2,6 +2,7 @@ import React,{useContext} from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import PersonOutlineSharpIcon from '@material-ui/icons/PersonOutlineSharp';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import {UserContext} from '../../App'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,14 +17,14 @@ const Homenav = () => {
       <div className='navbar-expand-lg navvbar'>
         <Link to='/' className="navbar-brand anchor text-primary">Chaos 🔥</Link>
         <div className='navdiv'>
-          <Link to='/' className="navbar-brand d-flex p-2 text-dark "> Home <HomeOutlinedIcon style={{marginTop:'3px',marginLeft:'2px'}} /></Link>
-          <Link to='/subscribedposts' className="navbar-brand d-flex p-2 text-dark "> My following posts </Link>
-          <Link to='/profile' className="navbar-brand d-flex p-2 text-dark ">Profile<PersonOutlineSharpIcon style={{marginTop:'3px',marginLeft:'2px'}} /></Link>
+          <Link to='/' className="navbar-brand d-flex p-2 text-dark " style={{fontFamily:'"Roboto", sans-serif'}}> Explore <LibraryBooksIcon style={{marginTop:'3px',marginLeft:'2px'}} /></Link>
+          <Link to='/subscribedposts' className="navbar-brand d-flex p-2 text-dark " style={{fontFamily:'"Roboto", sans-serif'}}> Home <HomeOutlinedIcon style={{marginTop:'3px',marginLeft:'2px'}} /></Link>
+          <Link to='/profile' className="navbar-brand d-flex p-2 text-dark " style={{fontFamily:'"Roboto", sans-serif'}}>Profile<PersonOutlineSharpIcon style={{marginTop:'3px',marginLeft:'2px'}} /></Link>
           <Link  onClick={()=>{
             localStorage.clear()
             dispatch({type:"CLEAR"})
             history.push('/login')
-          }} className="navbar-brand d-flex p-2 text-dark ">Logout<ExitToAppOutlinedIcon style={{marginTop:'3px',marginLeft:'2px'}} /></Link>
+          }} className="navbar-brand d-flex p-2 text-dark " style={{fontFamily:'"Roboto", sans-serif'}}>Logout<ExitToAppOutlinedIcon style={{marginTop:'3px',marginLeft:'2px'}} /></Link>
         </div>
       </div>
       </div>

@@ -78,8 +78,11 @@ const Login = () => {
           </div>
           <div className='col-md-5 bg-light p-3 bg-secondary box shadow'>
 
-
             <div className='row'>
+              <h1 className=''>Login</h1>
+            </div>
+
+            <div className='row my-5'>
               <TextField id="filled-basic" label="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
