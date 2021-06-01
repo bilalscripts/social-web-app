@@ -4,12 +4,17 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import Homenav from './Homenav';
 import {UserContext} from '../../App';
+import {InputGroup,FormControl} from "react-bootstrap";
+import Button from '@material-ui/core/Button';
+import SearchIcon from '@material-ui/icons/Search';
+
 
 
 const Home = (props) => {
   const history = useHistory();
   const [data,setData] = useState([]);
   const {state,dispatch} = React.useContext(UserContext)
+  const [user,setUser] = useState('')
   
 
     useEffect(()=>{
@@ -56,24 +61,34 @@ const Home = (props) => {
     <>
     <div className='container-fluid'>
         <Homenav />
+        
         <div className='row'>
 
-        <div className='col-md-3 bg-light post sidebar'>
-          
-          <Link to='/' className="navbar-brand d-flex p-2 text-dark ">Home</Link>
-          <Link to='/profile' className="navbar-brand d-flex p-2 text-dark ">Profile </Link>
-          <Link to='/profile' className="navbar-brand d-flex p-2 text-dark my-2">Following<span className="badge badge-light">4</span></Link>
-          <Link to='/profile' className="navbar-brand d-flex p-2 text-dark ">Followers</Link>
-
-
-        </div>
-
         <div className='col-md-8 bg-light post'>
+         
+          <div>
+          <InputGroup className="p-3" size='lg'>
+            <FormControl
+              aria-label="Example text with button addon"
+              aria-describedby="basic-addon1"
+              placeholder='Search' 
+
+              onFocus = {(e) => (e.target.placeholder = '')}
+              onBlur = {(e) => e.target.placeholder = 'Search'}
+              onChange = {(e) => {
+                setUser(e.target.value)
+              }}
+            />
+            <Button variant="primary"><SearchIcon/></Button>
+          </InputGroup>
+            
+          </div>
           <div className='border-bottom p-3 text-center'>
-          <button onClick={createPost} className='btn btn-primary' style={{width:'200px'}}>Create Post </button>
+            <button onClick={createPost} className='btn btn-primary' style={{width:'200px'}}>Create Post </button>
           </div>
         </div>
-        <div className='border-light border-bottom my-4'></div>
+
+        <div className=' col-md-8 border-light border-bottom my-4'></div>
         </div>
     </div>
 

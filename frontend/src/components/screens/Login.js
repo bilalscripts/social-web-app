@@ -70,7 +70,7 @@ const Login = () => {
 
     <>
 
-      <div className='container-fluid box'>
+      <div className='container-fluid'>
         <div className='row'>
           <div className='col-md-5 p-3 textArea'>
             <h1 className='text-primary'>Chaos 🔥</h1>
@@ -83,7 +83,7 @@ const Login = () => {
             </div>
 
             <div className='row my-5'>
-              <TextField id="filled-basic" label="Email"
+              <TextField id="filled-basic" label="Email" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 variant="filled" />

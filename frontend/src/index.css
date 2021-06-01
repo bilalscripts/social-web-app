@@ -52,7 +52,6 @@ a {
 .anchor {
   font-weight: bold;
   font-size: 40px;
-  margin-left: 100px;
 }
 
 .acc {
@@ -72,7 +71,7 @@ a {
 .navdiv {
   float: right;
   display: flex;
-  margin-right: 100px;
+  margin-top: 15px;
 }
 
 .navvbar {
@@ -80,8 +79,8 @@ a {
 }
 
 .textAreaa {
-  width: 600px;
-  height: 100px;
+  width: fit-content;
+  height: fit-content;
   background-color: rgb(218, 221, 228);
   border: none;
   border-radius: 20px;

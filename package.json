@@ -30,6 +30,7 @@
     "materialize-css": "^1.0.0-rc.2",
     "mongo": "^0.1.0",
     "mongoose": "^5.12.7",
+    "react-search-field": "^1.2.1",
     "validator": "^13.6.0"
   },
   "devDependencies": {

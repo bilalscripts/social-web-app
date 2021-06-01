@@ -58,16 +58,6 @@ const Home = (props) => {
         <Homenav />
         <div className='row'>
 
-        <div className='col-md-3 bg-light post sidebar'>
-          
-          <Link to='/' className="navbar-brand d-flex p-2 text-dark ">Home</Link>
-          <Link to='/profile' className="navbar-brand d-flex p-2 text-dark ">Profile </Link>
-          <Link to='/home' className="navbar-brand d-flex p-2 text-dark my-2">Following<span className="badge badge-light">4</span></Link>
-          <Link to='/home' className="navbar-brand d-flex p-2 text-dark ">Followers</Link>
-
-
-        </div>
-
         <div className='col-md-8 bg-light post'>
           <div className='border-bottom p-3 text-center'>
           <button onClick={createPost} className='btn btn-primary' style={{width:'200px'}}>Create Post </button>

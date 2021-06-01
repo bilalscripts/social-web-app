@@ -140,14 +140,14 @@ const Profile = () => {
           </div>
 
           <div className='d-flex'>
-            <p style={{marginLeft:'50px',marginTop:'10px'}}><strong>{mypics ? mypics.length : "wait.." }</strong> posts</p>
-            <p style={{marginLeft:'50px',marginTop:'10px'}}><strong>{state ? state.followers.length : "0"}</strong> followers</p>
-            <p style={{marginLeft:'50px',marginTop:'10px'}}><strong>{state ? state.following.length : "0"}</strong> following</p>
+            <p className='my-5 p-3'><strong>{mypics ? mypics.length : "wait.." }</strong> posts</p>
+            <p className='my-5 p-3'><strong>{state ? state.followers.length : "0"}</strong> followers</p>
+            <p className='my-5 p-3'><strong>{state ? state.following.length : "0"}</strong> following</p>
           </div>
             
           <div>
-            <p style={{marginLeft:'20px'}}>someBioIfAnny</p>
-            <p style={{marginLeft:'20px'}}>someBioIfAnny</p>
+            <p className='m-3'>someBioIfAnny</p>
+            <p className='m-3'>someBioIfAnny</p>
           </div>
           
         </div>
