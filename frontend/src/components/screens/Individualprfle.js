@@ -13,12 +13,8 @@ const Individualprfle = () => {
   console.log(userid)
   
   
-  const checkStatus = async () =>{
-    const isFollowed = await state.following.includes(userid)
-    return isFollowed
-  }
+  const [follow,setFollow] = useState(state ? !state.following.includes(userid) : true)
 
-  const [follow,setFollow] = useState(true)
 
   
 
@@ -117,7 +113,7 @@ const Individualprfle = () => {
         
         
         <div className='col-md-4 picture'>
-          <img style={{borderRadius:'50%'}} src='https://source.unsplash.com/250x250/?water' alt='imaheHere'></img>
+          <img style={{borderRadius:'50%'}} src={userProfile.user.pic} alt='imaheHere'></img>
         </div>
 
         <div className='col-md-8 d-block my-5'>

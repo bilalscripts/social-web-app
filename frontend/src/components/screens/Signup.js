@@ -27,30 +27,51 @@ const Signup = () => {
 
     if(validator.isEmail(email))
     {
-      fetch('http://localhost:3000/signup',{
-        method:"post",
-        headers:{
-          'Content-Type':"application/json"
-        },
-        body:JSON.stringify({
-          name,
-          email,
-          password
-        })
-      }).then(res=>res.json()).then(data=>{
-        if(data.error){
-          toast.error(data.error,{position:toast.POSITION.TOP_RIGHT})
-        }
-        else{
-          history.push('/login');
-        }
-      }).catch((err)=>{
-        console.log(err)
-      });
-    }
-    else{
-      toast.error('all fields must be filled',{position:toast.POSITION.TOP_RIGHT})
-    }    
+
+
+
+    const data = new FormData()
+    data.append("file", img.compressedBlob)
+    data.append("upload_preset", "social-web-app")
+    data.append("cloud_name", "doidlafka")
+
+    fetch("https://api.cloudinary.com/v1_1/doidlafka/image/upload", {
+      method: "post",
+      body: data
+    }).then(res => res.json()).then((data) => {
+
+
+      console.log(data.url)
+    // sending data to the database
+    fetch('/signup',{
+      method:"post",
+      headers:{
+        'Content-Type':"application/json"
+      },
+      body:JSON.stringify({
+        name,
+        email,
+        password,
+        pic:data.url
+      })
+    }).then(res=>res.json()).then(data=>{
+      if(data.error){
+        toast.error(data.error,{position:toast.POSITION.TOP_RIGHT})
+      }
+      else{
+        history.push('/login');
+      }
+    }).catch((err)=>{
+      console.log(err)
+    });
+
+    }).catch(err => console.log(err))
+
+    
+
+
+  
+    }  
 
   }
 
