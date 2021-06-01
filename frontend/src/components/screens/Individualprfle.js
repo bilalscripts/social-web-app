@@ -116,9 +116,15 @@ const Individualprfle = () => {
       <div className='row'>
         
         
-        <div className='col-md-4 picture'>
-          <img style={{borderRadius:'50%'}} src='https://source.unsplash.com/250x250/?water' alt='imaheHere'></img>
-        </div>
+        
+        
+
+        <div className='col-md-4 m-3 bg-light picture' style={{width:'320px', height:'400px', borderRadius:'10px'}}>
+            <div className='text-center'>
+            <img src='https://source.unsplash.com/250x250/?book' alt='thisImage' className='my-3' width='250px' height='250px'/>
+            </div>
+        </div> 
+        
 
         <div className='col-md-8 d-block my-5'>
             <div className='d-flex'>
