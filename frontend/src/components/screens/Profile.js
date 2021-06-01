@@ -159,8 +159,8 @@ const Profile = () => {
 
           <div className='d-flex'>
             <p style={{marginLeft:'50px',marginTop:'10px'}}><strong>{mypics ? mypics.length : "wait.." }</strong> posts</p>
-            <p style={{marginLeft:'50px',marginTop:'10px'}}><strong>{count}</strong> followers</p>
-            <p style={{marginLeft:'50px',marginTop:'10px'}}><strong>{count}</strong> following</p>
+            <p style={{marginLeft:'50px',marginTop:'10px'}}><strong>{state ? state.followers.length : "0"}</strong> followers</p>
+            <p style={{marginLeft:'50px',marginTop:'10px'}}><strong>{state ? state.following.length : "0"}</strong> following</p>
           </div>
             
           <div>

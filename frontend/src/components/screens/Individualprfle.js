@@ -18,11 +18,9 @@ const Individualprfle = () => {
     return isFollowed
   }
 
-  const [follow,setFollow] = useState(state ? checkStatus : false )
+  const [follow,setFollow] = useState(true)
 
-  const clickedStatus = () => {
-    setFollow(!follow);
-  }
+  
 
 
   useEffect(()=>{
@@ -54,8 +52,55 @@ const Individualprfle = () => {
       dispatch({type:"UPDATE",payload:{
         following:data.following,followers:data.followers}})
         localStorage.setItem("user",JSON.stringify(data))
+        setUserProfile((preVal)=>{
+          return {
+            ...preVal,
+            user:{
+              ...preVal.user,
+              followers: [...preVal.user.followers,data._id]
+            }
+          }
+        })
+        setFollow(!follow)
     })
   }
+
+
+
+
+
+  const unfollowUser = () =>{
+    fetch('/unfollow',{
+      method:"put",
+      headers:{
+        "content-Type":"application/json",
+        "Authorization":"Bearer "+localStorage.getItem('jwt')
+      },
+      body:JSON.stringify({
+        unfollowid:userid,
+
+      })
+    }).then(res=>res.json())
+    .then(data=>{
+      console.log(data)
+      dispatch({type:"UPDATE",payload:{
+        following:data.following,followers:data.followers}})
+        localStorage.setItem("user",JSON.stringify(data))
+        
+        setUserProfile((preVal)=>{
+          const newFollower = preVal.user.followers.filter(item=>item !==data._id)
+          return {
+            ...preVal,
+            user:{
+              ...preVal.user,
+              followers: newFollower
+            }
+          }
+        })
+        setFollow(!follow)
+    })
+  }
+
 
 
   
@@ -83,10 +128,13 @@ const Individualprfle = () => {
               {
                 follow ? <button onClick={()=>{
                   followUser()
-                  clickedStatus()
                 }
                 } className='btn btn-primary text-center justify-content-center'><strong><h5>Follow</h5></strong></button> : 
-                <button onClick={clickedStatus} className='btn btn-primary text-center justify-content-center'><strong><h5>Unfollow</h5></strong></button> 
+                
+                
+                <button onClick={()=>{
+                  unfollowUser()
+                }} className='btn btn-primary text-center justify-content-center'><strong><h5>Unfollow</h5></strong></button> 
               }
               </Link> 
             <div/>

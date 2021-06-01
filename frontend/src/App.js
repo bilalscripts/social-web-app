@@ -11,6 +11,7 @@ import Profile from './components/screens/Profile'
 import Createpost from './components/screens/CreatePost';
 import {reducer, initialState} from './reducers/userReducer';
 import Individualprfle from './components/screens/Individualprfle';
+import Subpost from './components/screens/Subpost'
 export const UserContext = createContext()
 
 
@@ -41,6 +42,7 @@ useEffect(()=>{
     <Route exact path='/profile' component={Profile} />
     <Route exact path='/create' component={Createpost} />
     <Route exact path='/profile/:userid' component={Individualprfle} />
+    <Route exact path='/subscribedposts' component={Subpost} />
 
 
   </Switch>

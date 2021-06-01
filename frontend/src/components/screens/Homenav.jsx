@@ -17,6 +17,7 @@ const Homenav = () => {
         <Link to='/' className="navbar-brand anchor text-primary">Chaos 🔥</Link>
         <div className='navdiv'>
           <Link to='/' className="navbar-brand d-flex p-2 text-dark "> Home <HomeOutlinedIcon style={{marginTop:'3px',marginLeft:'2px'}} /></Link>
+          <Link to='/subscribedposts' className="navbar-brand d-flex p-2 text-dark "> My following posts </Link>
           <Link to='/profile' className="navbar-brand d-flex p-2 text-dark ">Profile<PersonOutlineSharpIcon style={{marginTop:'3px',marginLeft:'2px'}} /></Link>
           <Link  onClick={()=>{
             localStorage.clear()
