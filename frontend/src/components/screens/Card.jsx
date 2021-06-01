@@ -34,6 +34,9 @@ const Card = (props) => {
 
 
   const makeComment = (text, postId) => {
+
+    console.log('comment added')
+    
     fetch('/comment', {
       method: "put",
       headers: {
@@ -132,18 +135,19 @@ const Card = (props) => {
 
 
               {
-                (
+                (<>
                   <form onSubmit={(e) => {
                     e.preventDefault()
                     makeComment(e.target[0].value, props.id)
-
                   }}>
                     <div className='d-flex'>
-                      <button className='m-2 btn btn-outline-primary' onClick={() => { setComment(!comment) }}><CommentOutlinedIcon /></button>
-                      <input type='text' style={{ marginLeft: '100px' }} placeholder='comment here' onChange={(event) => { setCommText(event.target.value) }} className='form-control' />
-
+                      <input type='text' value={commText} style={{ marginLeft: '100px' }} placeholder='comment here' onChange={(event) => { setCommText(event.target.value) }} className='form-control' />
+                    
                     </div>
                   </form>
+                  <button className='m-2 btn btn-outline-primary' onClick={() => { setComment(!comment) }}><CommentOutlinedIcon /></button>
+                  </>
+
                 )
               }
 
@@ -161,8 +165,8 @@ const Card = (props) => {
                   props.comments.map(record => {
                     return (
                       <>
-                        <h4>personNameHere</h4>
-                        <h6> <span style={{ fontWeight: "500", width: '' }} className='border-bottom comment'>{record.postedBy.name}</span>{record.text}</h6>
+                        <h4>{record.postedBy.name}</h4>
+                        <h6> <span style={{ fontWeight: "500", width: '' }} className='border-bottom comment'></span>{record.text}</h6>
                       </>
                     )
                   })
