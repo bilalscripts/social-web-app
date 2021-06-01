@@ -28,11 +28,6 @@ const Signup = () => {
     if(validator.isEmail(email))
     {
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> fd4b69fad6a8874ae20d7f687eede95f182b52ec
     const data = new FormData()
     data.append("file", img.compressedBlob)
     data.append("upload_preset", "social-web-app")
