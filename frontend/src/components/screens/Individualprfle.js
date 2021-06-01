@@ -13,12 +13,8 @@ const Individualprfle = () => {
   console.log(userid)
   
   
-  const checkStatus = async () =>{
-    const isFollowed = await state.following.includes(userid)
-    return isFollowed
-  }
+  const [follow,setFollow] = useState(state ? !state.following.includes(userid) : true)
 
-  const [follow,setFollow] = useState(true)
 
   
 
