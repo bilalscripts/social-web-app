@@ -79,7 +79,7 @@ a {
 }
 
 .textAreaa {
-  width: fit-content;
+  width: max-content;
   height: fit-content;
   background-color: rgb(218, 221, 228);
   border: none;

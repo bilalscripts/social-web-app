@@ -113,7 +113,7 @@ const Individualprfle = () => {
         
         
         <div className='col-md-4 picture'>
-          <img style={{borderRadius:'50%'}} src={userProfile.user.pic} alt='imaheHere'></img>
+          <img height='300px' width='300px' src={userProfile.user.pic} alt='imaheHere'></img>
         </div>
 
         <div className='col-md-8 d-block my-5'>

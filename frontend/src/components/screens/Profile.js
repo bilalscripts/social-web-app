@@ -72,13 +72,13 @@ const Profile = () => {
 
   const updateData = () =>{
     
-
+    if(img.compressedBlob){
     console.log(img.compressedBlob)
     const data = new FormData()
     data.append("file", img.compressedBlob)
     data.append("upload_preset", "social-web-app")
     data.append("cloud_name", "doidlafka")
-
+    
     fetch("https://api.cloudinary.com/v1_1/doidlafka/image/upload", {
       method: "post",
       body: data
@@ -99,7 +99,7 @@ const Profile = () => {
       }).then(res=>res.json()).then(result=>console.log(result))
 
     }).catch(err=>console.log(err));
-
+  }
   }
 
 
@@ -113,7 +113,7 @@ const Profile = () => {
         
         
         <div className='col-md-4 picture'>
-          <img style={{borderRadius:'50%'}}  src={state ? state.pic : "loading"} alt='imaheHere'></img>
+          <img height='300px' width='300px' src={state ? state.pic : "loading"} alt='imaheHere'></img>
         </div>
 
         <div className='col-md-8 d-block'>
@@ -122,7 +122,7 @@ const Profile = () => {
             <h3 className='m-4'>{state ? state.name : "wait.." }</h3>
             <Link className='m-4 fixed'><Button variant="contained" onClick={togglePopus}>Edit Profile</Button></Link> 
             {isOpen && <PopUpDailoge
-              content={<>
+              togglePopus = {togglePopus} content={<>
                 
                 <div className='text-center popupitems'>
                 
@@ -130,7 +130,7 @@ const Profile = () => {
                   img.compressedLink ? (
                     <img src = {img.compressedLink} alt='imgaeHere' height="200px" width="200px" id='openImage'/>
                   ) : (
-                    <img src = {Img} alt='imgaeHere' height="200px" width="200px" id='openImage'/>
+                    <img src = {state.pic} alt='imgaeHere' height="200px" width="200px" id='openImage'/>
                   )
                 
                 }
