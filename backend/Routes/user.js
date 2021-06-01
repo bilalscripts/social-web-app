@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const { restart } = require('nodemon');
 const Post = mongoose.model('Post')
 const login = require('../middleware/login')
 const User = mongoose.model("User") 
@@ -62,6 +63,21 @@ router.put('/unfollow',login,(req,res)=>{
             return res.status(422).json({error:err})
         })
     })
+})
+
+
+
+router.put('/updatepic',login,(req,res)=>{
+    User.findByIdAndUpdate(req.user._id,{$set:{pic:req.body.pic}},{new:true},
+    (err,result)=>{
+
+        if(err)
+        {
+            res.status(422).json({error:"pic cannot post"})
+        }
+        res.json(result)
+    })
+
 })
 
 
