@@ -117,7 +117,7 @@ const Createpost = () => {
         <Homenav />
         <div className='row'>
 
-          <div className='col-md-4 bg-light post'>
+          <div className='col-md-4 post' style={{backgroundColor:'#23395b'}}>
             <div className='border-bottom p-3'>
               <h3>Create a Post</h3>
             </div>

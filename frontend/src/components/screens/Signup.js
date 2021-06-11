@@ -23,12 +23,13 @@ const Signup = () => {
   const [img, setImg] = useState({
     compressedLink : "",
   })
+  const [disbale,setDisable] = useState(false);
 
   const postData = () => {
 
     if(validator.isEmail(email))
     {
-
+    setDisable(!disbale);
     const data = new FormData()
     data.append("file", img.compressedBlob)
     data.append("upload_preset", "social-web-app")
@@ -65,11 +66,10 @@ const Signup = () => {
     });
 
     }).catch(err => console.log(err))
-
-    
-
-
-  
+    }
+    else{
+      toast.error('all fields mult be fille' , {position:toast.POSITION.TOP_RIGHT});
+      setDisable(disbale);
     }  
 
   }
@@ -191,7 +191,7 @@ const Signup = () => {
 
               <div className='row' id='accbtn'>
                 <button className='btn btn-warning' 
-                onClick={postData}>Sign Up</button>
+                onClick={postData} disabled={disbale}>Sign Up</button>
               </div>
 
             

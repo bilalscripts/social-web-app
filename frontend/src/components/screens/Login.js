@@ -14,12 +14,14 @@ const Login = () => {
   const history = useHistory();
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [disbale,setDisable] = useState(false);
 
  
 
   const postData = () => {
-
+    
     if (validator.isEmail(email)) {
+      setDisable(!disbale);
       fetch("/signin", {
         method: "post",
         headers: {
@@ -50,6 +52,7 @@ const Login = () => {
     }
     else {
       toast.error('all fields mult be fille' , {position:toast.POSITION.TOP_RIGHT});
+      setDisable(disbale);
     }
 
   }
@@ -123,7 +126,7 @@ const Login = () => {
 
 
             <div className='row'>
-              <button className='btn btn-warning'  onClick={postData} >Login</button>
+              <button className='btn btn-warning' disabled={disbale} onClick={postData} >Login</button>
             </div>
 
             <br className='text-dark'></br>

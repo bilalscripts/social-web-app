@@ -163,13 +163,13 @@ const Card = (props) => {
           comment ? (
             <button className='m-2 btn btn-outline-primary' onClick={() => { setComment(!comment) }}><CommentOutlinedIcon /></button>,
             <div className='row' data-aos="fade-down">
-              <div className='col-md-4 bg-light post'>
+              <div className='col-md-4 post' style={{backgroundColor:'#23395b'}}>
                 {
                   props.comments.map(record => {
                     return (
                       <>
-                        <h4>{record.postedBy.name}</h4>
-                        <h6> <span style={{ fontWeight: "500", width: '' }} className='border-bottom comment'></span>{record.text}</h6>
+                        <h4 className=''>{record.postedBy.name}</h4>
+                        <h6 className=''> <span style={{ fontWeight: "500"}} className='border-bottom comment'></span>{record.text}</h6>
                       </>
                     )
                   })
