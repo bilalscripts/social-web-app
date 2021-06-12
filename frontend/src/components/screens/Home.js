@@ -15,7 +15,7 @@ const Home = (props) => {
   const [data,setData] = useState([]);
   const {state,dispatch} = React.useContext(UserContext)
   const [user,setUser] = useState('')
-  
+  const [searching, setSearching] = useState([])
 
     useEffect(()=>{
 
@@ -52,6 +52,23 @@ const Home = (props) => {
       setData(newData);
     }
 
+const searched = (query) =>{
+  setUser(query)
+
+  fetch('/search-users',{
+    method:'post',
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+      query,
+    })
+  }).then(res=>res.json()).then(results=>setSearching(results))
+}
+
+
+
+
 
 
   const createPost = () => {
@@ -72,14 +89,17 @@ const Home = (props) => {
               aria-label="Example text with button addon"
               aria-describedby="basic-addon1"
               placeholder='Search' 
-
+              
               onFocus = {(e) => (e.target.placeholder = '')}
               onBlur = {(e) => e.target.placeholder = 'Search'}
               onChange = {(e) => {
-                setUser(e.target.value)
-              }}
-            />
-            <Button className='text-light' variant="primary"><SearchIcon/></Button>
+                console.log(e.target.value)
+              searched(e.target.value)
+              }             
+              }/>
+              <h2>{searching.map(item=>{
+                return item.name;              })}</h2>
+            <Button className='text-light' onClick={searched} variant="primary"><SearchIcon/></Button>
           </InputGroup>
             
           </div>
