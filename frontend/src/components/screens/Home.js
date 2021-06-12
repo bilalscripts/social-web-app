@@ -15,7 +15,7 @@ const Home = (props) => {
   const [data,setData] = useState([]);
   const {state,dispatch} = React.useContext(UserContext)
   const [user,setUser] = useState('')
-  const [searching, setSearching] = useState([]);
+  const [searching, setSearching] = useState({});
   const [searchBar, setSearchBar] = useState(false);
 
     useEffect(()=>{
@@ -67,6 +67,14 @@ const searched = (query) =>{
   }).then(res=>res.json()).then(results=>setSearching(results))
 }
 
+const getUser = () => {
+  const users = [];
+  for (const item in searching) {
+    users.push(item.name);
+  }
+  return users;
+}
+
 
 
 
@@ -98,15 +106,13 @@ const searched = (query) =>{
               }}
               onChange = {(e) => {
                 console.log(e.target.value)
-              searched(e.target.value)
-              }}
-              onClick = {() => {
+                searched(e.target.value)
                 setSearchBar(true);
+                
               }}
 
               />
-              <h2>{searching.map(item=>{
-                return item.name;              })}</h2>
+              
             <Button className='text-light' onClick={searched} variant="primary"><SearchIcon/></Button>
           </InputGroup>
 
@@ -114,21 +120,12 @@ const searched = (query) =>{
             searchBar ? (
               <div className='d-grid text-dark rounded-3' style={{background:'#161925'}} data-aos="fade-down">
               
-                {/* {
-                  props.comments.map(record => {
-                    return (
-                      <>
-                        <h6 className=''>{record.postedBy.name}</h4>
-                        <h6 className=''> <span style={{ fontWeight: "500"}} className='border-bottom comment'></span>{record.text}</h6>
-                      </>
-                    )
-                  })
-                } */}
-                <Link exact className='itemsInSearch m-3 h-50' to=''>NamesHere</Link> 
-                <Link exact className='itemsInSearch m-3 h-50' to=''>NamesHere</Link> 
-                <Link exact className='itemsInSearch m-3 h-50' to=''>NamesHere</Link> 
-                <Link exact className='itemsInSearch m-3 h-50' to=''>NamesHere</Link> 
-                <Link exact className='itemsInSearch m-3 h-50' to=''>NamesHere</Link> 
+                {
+                  
+                    getUser().map( (item) => {
+                      return <h2>{item}</h2>
+                    })
+                }
               </div>
             ) : (
               <>
