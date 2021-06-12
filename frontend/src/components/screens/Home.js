@@ -1,7 +1,7 @@
 import Card from './Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect} from 'react'
-import { useHistory } from 'react-router-dom';
+import { Link,useHistory } from 'react-router-dom';
 import Homenav from './Homenav';
 import {UserContext} from '../../App';
 import {InputGroup,FormControl} from "react-bootstrap";
@@ -15,7 +15,8 @@ const Home = (props) => {
   const [data,setData] = useState([]);
   const {state,dispatch} = React.useContext(UserContext)
   const [user,setUser] = useState('')
-  const [searching, setSearching] = useState([])
+  const [searching, setSearching] = useState([]);
+  const [searchBar, setSearchBar] = useState(false);
 
     useEffect(()=>{
 
@@ -91,16 +92,49 @@ const searched = (query) =>{
               placeholder='Search' 
               
               onFocus = {(e) => (e.target.placeholder = '')}
-              onBlur = {(e) => e.target.placeholder = 'Search'}
+              onBlur = {(e) => {
+                setSearchBar(false);
+                e.target.placeholder = 'Search'
+              }}
               onChange = {(e) => {
                 console.log(e.target.value)
               searched(e.target.value)
-              }             
-              }/>
+              }}
+              onClick = {() => {
+                setSearchBar(true);
+              }}
+
+              />
               <h2>{searching.map(item=>{
                 return item.name;              })}</h2>
             <Button className='text-light' onClick={searched} variant="primary"><SearchIcon/></Button>
           </InputGroup>
+
+          {
+            searchBar ? (
+              <div className='d-grid text-dark rounded-3' style={{background:'#161925'}} data-aos="fade-down">
+              
+                {/* {
+                  props.comments.map(record => {
+                    return (
+                      <>
+                        <h6 className=''>{record.postedBy.name}</h4>
+                        <h6 className=''> <span style={{ fontWeight: "500"}} className='border-bottom comment'></span>{record.text}</h6>
+                      </>
+                    )
+                  })
+                } */}
+                <Link exact className='itemsInSearch m-3 h-50' to=''>NamesHere</Link> 
+                <Link exact className='itemsInSearch m-3 h-50' to=''>NamesHere</Link> 
+                <Link exact className='itemsInSearch m-3 h-50' to=''>NamesHere</Link> 
+                <Link exact className='itemsInSearch m-3 h-50' to=''>NamesHere</Link> 
+                <Link exact className='itemsInSearch m-3 h-50' to=''>NamesHere</Link> 
+              </div>
+            ) : (
+              <>
+              </>
+            )
+          }
             
           </div>
           <div className='p-3 text-center'>

@@ -168,5 +168,7 @@ img {
   font-size: 20px;
 }
 
-.icon {
+.itemsInSearch:hover {
+  background: #23395b;
+  border-radius: 10px;
 }
