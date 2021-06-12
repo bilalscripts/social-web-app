@@ -1,5 +1,5 @@
-import { Link, useHistory } from 'react-router-dom';
-import React, { useState, useEffect, useContext } from 'react';
+import { Link} from 'react-router-dom';
+import React, { useState, useContext } from 'react';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import CommentOutlinedIcon from '@material-ui/icons/CommentOutlined';
@@ -117,18 +117,18 @@ const Card = (props) => {
     <>
       <div className=' container-fluid posts'>
         <div className='row'>
-          <div className='col-md-8 post' style={{backgroundColor:'#23395b'}}>
+          <div className='col-md-6 post' style={{backgroundColor:'#23395b'}}>
             <div className='my-3 p-2'>
               <div className='float-end'>
-                {(props.postedById === state._id) && <button className='btn btn-transparent' onClick={() => { deletePost(props.id) }}><DeleteRoundedIcon /></button>}
+                {(props.postedById === state._id) && <button className='btn btn-transparent' onClick={() => { deletePost(props.id) }}><DeleteRoundedIcon className='text-light'/></button>}
               </div>
               <Link style={{color:'white', fontSize:'35px'}} to={ (props.postedById !== state._id) ?`profile/${props.postedById}` :`profile` } className="btn">{props.postedBy}</Link>
               <p style={{color:'white',fontSize:'25px'}} className='my-3'>{props.body}</p>
             </div>
             <div className='image p-2'>
-              <img src={props.photo} alt='thisImage' />
+              <img className='w-50' src={props.photo} alt='thisImage' />
             </div>
-            <h6 style={{color:'white',fontSize:'15px'}}>{props.likes.length} people Liked</h6>
+            <h6 style={{color:'white',fontSize:'15px', marginTop:'10px'}}>{props.likes.length} people Liked</h6>
             <h6 style={{color:'white',fontSize:'15px'}}>{props.comments.length} people Commented</h6>
 
             <div className='p-2 d-flex justify-content-center'>

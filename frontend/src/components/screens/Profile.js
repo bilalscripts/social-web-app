@@ -1,19 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Homenav from './Homenav';
-import Button from '@material-ui/core/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import TextField from '@material-ui/core/TextField';
 import PopUpDailoge from './PopUpDailoge';
 import Profilecards from './Profilecards';
-import Img from '../images/dp.png';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import imageCompression from "browser-image-compression";
 import {toast} from 'react-toastify';
 import {UserContext} from '../../App';
 import {InputGroup,FormControl} from "react-bootstrap";
-let count = 4;
 
 const Profile = () => {
   

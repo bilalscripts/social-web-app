@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Homenav from './Homenav';
 import imageCompression from "browser-image-compression";
 import Card from "react-bootstrap/Card";
@@ -17,8 +17,6 @@ toast.configure();
 const Createpost = () => {
 
   const [body, setBody] = useState('');
-  const [image, setImage] = useState();
-  const [url, setUrl] = useState('');
   const history = useHistory();
   const [img, setImg] = useState({
     compressedLink:
@@ -27,6 +25,7 @@ const Createpost = () => {
     originalLink: "",
     uploadImage: false
   })
+  const [disbale,setDisable] = useState(false);
 
 
   const postDetails = (x) => {
@@ -91,18 +90,17 @@ const Createpost = () => {
 
 
   const compressUpload = () => {
-
+    setDisable(!disbale);
     const options = {
-      maxSizeMB: 0.5,
+      maxSizeMB: 2,
       maxWidthOrHeight: 200,
       useWebWorker: true
     };
     
     img.originalImage && body ? (
       imageCompression(img.originalImage, options).then(x => {
-        const link = URL.createObjectURL(x);
         postDetails(x)
-        console.log('image after compression: ',x);
+        console.log('image after compression: ',x.size/1024/1024);
       })
     ) : (
       toast.error('image or title is missing ')
@@ -123,10 +121,10 @@ const Createpost = () => {
             </div>
 
 
-            <div className='border-bottom p-4' style={{ display: 'grid', justifyContent: 'center', padding: '5px' }}>
+            <div className=' text-center border-bottom p-4' style={{ display: 'grid', justifyContent: 'center', padding: '5px' }}>
               <textarea placeholder='Whats on your mind ?' onChange={(event) => { setBody(event.target.value) }} value={body} className=' textAreaa my-3 p-3 '></textarea>
 
-              <div>
+              <div className='text-center'>
                 <div className='text-center d-flex'>
                 <h4 className='my-3'>Select Image</h4>
                   <input accept="image/*" id="icon-button-file"
@@ -142,7 +140,7 @@ const Createpost = () => {
                 </div>
                 {
                   img.originalLink ? (
-                    <div className="col-md-4 offset-3 my-4">
+                    <div className=" col-md-4 my-4">
                       <Card.Img variant="top" src={img.originalLink} style={{ width: '300px', height: '300px'}}></Card.Img>
                     </div>) :
                     (
@@ -156,7 +154,7 @@ const Createpost = () => {
             <div className='p-3 my-2 d-flex justify-content-center' >
               <Button type="button" variant="primary" size="lg" onClick={() => {
                 compressUpload();
-              }}>Post</Button>
+              }} disabled={disbale}>Post</Button>
             </div>
 
 

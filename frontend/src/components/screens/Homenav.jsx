@@ -1,4 +1,4 @@
-import React,{useContext, useState} from 'react';
+import React,{useContext} from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import PersonOutlineSharpIcon from '@material-ui/icons/PersonOutlineSharp';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
@@ -6,12 +6,11 @@ import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import {UserContext} from '../../App'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Navbar, Container , Nav, InputGroup,FormControl} from "react-bootstrap";
+import {Navbar, Container , Nav} from "react-bootstrap";
 
 
 const Homenav = () => {
   const {state,dispatch} = useContext(UserContext)
-  const [user,setUser] = useState('')
   const history = useHistory();
   return(
     <>

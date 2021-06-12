@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import Homenav from  './Homenav';
 import {Link, useParams} from 'react-router-dom'
 import {UserContext} from '../../App';
-import { loadImage } from 'browser-image-compression';
 
 
 const Individualprfle = () => {

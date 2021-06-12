@@ -1,7 +1,7 @@
 import Card from './Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState, useEffect, useContext } from 'react'
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState, useEffect} from 'react'
+import { useHistory } from 'react-router-dom';
 import Homenav from './Homenav';
 import {UserContext} from '../../App';
 import {InputGroup,FormControl} from "react-bootstrap";
@@ -64,7 +64,7 @@ const Home = (props) => {
         
         <div className='row'>
 
-        <div className='col-md-8 post' style={{backgroundColor:'#23395b'}}>
+        <div className='col-md-6 post' style={{backgroundColor:'#23395b'}}>
          
           <div>
           <InputGroup className="p-3" size='lg'>
