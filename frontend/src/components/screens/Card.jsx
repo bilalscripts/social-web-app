@@ -36,7 +36,7 @@ const Card = (props) => {
   const makeComment = (text, postId) => {
 
     console.log('comment added')
-    
+    setCommText('')
     fetch('/comment', {
       method: "put",
       headers: {
