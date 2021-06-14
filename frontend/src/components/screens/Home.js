@@ -69,10 +69,7 @@ const searched = (query) =>{
 
 const getUser = () => {
   const users = [];
-  for (const item in searching) {
-    users.push(item.name);
-  }
-  return users;
+  console.log(searching)
 }
 
 
@@ -105,10 +102,9 @@ const getUser = () => {
                 e.target.placeholder = 'Search'
               }}
               onChange = {(e) => {
-                console.log(e.target.value)
+                
                 searched(e.target.value)
                 setSearchBar(true);
-                
               }}
 
               />
@@ -118,13 +114,13 @@ const getUser = () => {
 
           {
             searchBar ? (
-              <div className='d-grid text-dark rounded-3' style={{background:'#161925'}} data-aos="fade-down">
+              <div className='d-grid text-light rounded-3' style={{background:'#161925'}} data-aos="fade-down">
               
                 {
-                  
-                    getUser().map( (item) => {
-                      return <h2>{item}</h2>
-                    })
+                  searching ? (
+                    searching
+                  ) : ('')
+                   
                 }
               </div>
             ) : (
