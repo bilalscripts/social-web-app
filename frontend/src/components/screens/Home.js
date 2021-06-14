@@ -15,7 +15,7 @@ const Home = (props) => {
   const [data,setData] = useState([]);
   const {state,dispatch} = React.useContext(UserContext)
   const [user,setUser] = useState('')
-  const [searching, setSearching] = useState({});
+  const [searching, setSearching] = useState([]);
   const [searchBar, setSearchBar] = useState(false);
 
     useEffect(()=>{
@@ -64,13 +64,9 @@ const searched = (query) =>{
     body:JSON.stringify({
       query,
     })
-  }).then(res=>res.json()).then(results=>setSearching(results))
+  }).then(res=>res.json()).then(results=>setSearching(results.user))
 }
 
-const getUser = () => {
-  const users = [];
-  console.log(searching)
-}
 
 
 
@@ -117,11 +113,11 @@ const getUser = () => {
               <div className='d-grid text-light rounded-3' style={{background:'#161925'}} data-aos="fade-down">
               
                 {
-                  searching ? (
-                    searching
-                  ) : ('')
-                   
+                  searching.map((item) => {
+                    return <h1>{item.name}</h1>
+                  })
                 }
+                
               </div>
             ) : (
               <>
