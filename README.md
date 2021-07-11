@@ -20,7 +20,6 @@ it is built with React, Redux, Node, Express, bootstrap, JavaScript, and CSS.
 
 ## Installation and Setup Instructions
 
-#### Example:  
 
 Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
 
