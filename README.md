@@ -15,7 +15,6 @@ it is built with React, Redux, Node, Express, bootstrap, JavaScript, and CSS.
 ![alt text](https://res.cloudinary.com/doidlafka/image/upload/v1626011952/Capture2_lbes8s.png)
 ![alt text](https://res.cloudinary.com/doidlafka/image/upload/v1626011956/Capture3_xsxo6s.png)
 ![alt text](https://res.cloudinary.com/doidlafka/image/upload/v1626011965/Capture5_gwbube.png)
-![alt text](https://res.cloudinary.com/doidlafka/image/upload/v1626012693/Capture4_q9oenh.png)
 
 
 
