@@ -94,7 +94,7 @@ const searched = (query) =>{
               
               onFocus = {(e) => (e.target.placeholder = '')}
               onBlur = {(e) => {
-                setSearchBar(false);
+               
                 e.target.placeholder = 'Search'
               }}
               onChange = {(e) => {
@@ -114,7 +114,7 @@ const searched = (query) =>{
               
                 {
                   searching.map((item) => {
-                    return <h1>{item.name}</h1>
+                    return <h5><Link to={`profile/${item._id}`}>{item.name}</Link></h5>
                   })
                 }
                 
