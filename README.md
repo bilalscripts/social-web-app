@@ -27,7 +27,7 @@ Clone down this repository. You will need `node` and `npm` installed globally on
 Installation:
 
 `npm install`  
-- install dependpendencies in frontend and main repository.
+- install dependpendencies in frontend and main directory.
 
 
 To Start app:
