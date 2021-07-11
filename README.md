@@ -1,6 +1,3 @@
-
-## Project Name
-
 # social-web-app
 
 
