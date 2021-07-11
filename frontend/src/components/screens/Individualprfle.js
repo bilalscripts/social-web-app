@@ -167,7 +167,15 @@ const Individualprfle = () => {
     </div>
       </>
       
-      : <h1>Loading</h1>}
+      : <>
+      <div className="d-flex justify-content-center mt-5" > 
+     <div className="spinner-grow text-warning" style={{width: "10rem", height: "10rem"}} role="status">
+    <span className="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+</>
+}
     
     
     

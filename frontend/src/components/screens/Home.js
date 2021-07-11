@@ -135,6 +135,11 @@ const searched = (query) =>{
     </div>
 
     {
+      data.length===0? ( <div className="d-flex justify-content-center mt-5" > 
+     <div className="spinner-grow text-warning" style={{width: "10rem", height: "10rem"}} role="status">
+    <span className="visually-hidden">Loading...</span>
+  </div>
+</div>) :
       data.map(item=>{
         return (
           <Card body={item.body} postedBy={item.postedBy.name} photo={item.photo} key={item._id} 
